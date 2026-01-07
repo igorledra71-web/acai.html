@@ -30,7 +30,6 @@ body {
     font-size: 36px;
     margin: 0;
     color: #ffd34d;
-    letter-spacing: 1px;
 }
 .splash p {
     margin: 10px 0 30px;
@@ -59,12 +58,12 @@ body {
     margin: auto;
     background: linear-gradient(180deg, #3b0047, #1b001f);
     min-height: 100vh;
-    padding: 20px 15px 160px;
+    padding: 20px 15px 20px;
     display: none;
     text-align: center;
 }
 
-/* NOME DA CONVENIÊNCIA (DESTAQUE) */
+/* MARCA */
 .brand-title {
     font-size: 30px;
     font-weight: 900;
@@ -78,20 +77,7 @@ body {
 .brand-subtitle {
     font-size: 14px;
     opacity: 0.9;
-    margin-bottom: 15px;
-}
-
-/* BLOCO DESTAQUE */
-.highlight-box {
-    background: rgba(255,255,255,0.1);
-    border: 1px dashed #ffd34d;
-    border-radius: 16px;
-    padding: 15px;
     margin-bottom: 20px;
-    font-size: 15px;
-}
-.highlight-box strong {
-    color: #ffd34d;
 }
 
 /* SEÇÕES */
@@ -168,42 +154,27 @@ body {
     resize: none;
 }
 
-/* CARRINHO */
-.cart-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #ffcc00, #ff9900);
+/* CARRINHO FIXO NO RODAPÉ */
+.cart-footer {
+    width: 100%;
+    background: #ffffff;
     color: #3b0047;
-    padding: 14px 18px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-    z-index: 10;
+    border-top: 3px solid #ffd34d;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 20px 20px 0 0;
 }
 
-.cart-box {
-    position: fixed;
-    bottom: 90px;
-    left: 10px;
-    right: 10px;
-    max-width: 460px;
-    margin: auto;
-    background: #fff;
-    color: #3b0047;
-    border-radius: 20px;
-    padding: 15px;
-    display: none;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    z-index: 10;
+.cart-title {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .cart-item {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 8px 0;
+    align-items: center;
+    padding: 6px 0;
     border-bottom: 1px dashed #ddd;
     font-size: 14px;
 }
@@ -217,8 +188,8 @@ body {
     background: #e60000;
     color: #fff;
     border: none;
-    border-radius: 10px;
-    padding: 4px 10px;
+    border-radius: 8px;
+    padding: 4px 8px;
     cursor: pointer;
     font-size: 12px;
 }
@@ -258,10 +229,6 @@ body {
     <div class="brand-title">Conveniência do Açaí</div>
     <div class="brand-subtitle">Monte seu açaí do seu jeito</div>
 
-    <div class="highlight-box">
-        <strong>Promo de hoje:</strong> 500ml + 2 acompanhamentos por R$ 20,00 🔥
-    </div>
-
     <div class="section">
 
         <!-- TAMANHOS -->
@@ -289,15 +256,15 @@ body {
         </div>
 
     </div>
-</div>
 
-<!-- CARRINHO -->
-<div class="cart-button" onclick="toggleCart()">🛒 Carrinho</div>
+    <!-- CARRINHO NO RODAPÉ -->
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+        <div class="cart-title">🛒 Seu Carrinho</div>
+        <div id="cartItems"></div>
+        <div class="total" id="totalValue">Total: R$ 0,00</div>
+        <div class="btn-finish" onclick="finishOrder()">Finalizar Pedido</div>
+    </div>
 
-<div class="cart-box" id="cartBox">
-    <div id="cartItems"></div>
-    <div class="total" id="totalValue">Total: R$ 0,00</div>
-    <div class="btn-finish" onclick="finishOrder()">Finalizar Pedido</div>
 </div>
 
 <script>
@@ -316,7 +283,6 @@ function toggleBox(id) {
 function addToCart(name, price) {
     cart.push({ name, price });
     updateCart();
-    openCart();
 }
 
 function removeFromCart(index) {
@@ -326,6 +292,7 @@ function removeFromCart(index) {
 
 function updateCart() {
     const cartItemsDiv = document.getElementById("cartItems");
+    const cartFooter = document.getElementById("cartFooter");
     cartItemsDiv.innerHTML = "";
     let total = 0;
 
@@ -343,17 +310,10 @@ function updateCart() {
     document.getElementById("totalValue").innerText = "Total: R$ " + total.toFixed(2).replace('.', ',');
 
     if (cart.length === 0) {
-        document.getElementById("cartBox").style.display = "none";
+        cartFooter.style.display = "none";
+    } else {
+        cartFooter.style.display = "block";
     }
-}
-
-function toggleCart() {
-    const cartBox = document.getElementById("cartBox");
-    cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
-}
-
-function openCart() {
-    document.getElementById("cartBox").style.display = "block";
 }
 
 function finishOrder() {
@@ -380,7 +340,6 @@ function finishOrder() {
     message += "%0AItens:%0A";
 
     let total = 0;
-
     cart.forEach(item => {
         message += "- " + item.name + " (R$ " + item.price.toFixed(2).replace('.', ',') + ")%0A";
         total += item.price;
