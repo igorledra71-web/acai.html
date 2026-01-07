@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Conveniência do Açaí • Rabikas Burguer</title>
+<title>Conveniência do Açaí</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -10,21 +10,77 @@
         margin: 0;
         padding: 0;
         background: #1b001f;
-        font-family: 'Segoe UI', Arial, sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         color: #fff;
         overflow-x: hidden;
     }
 
+    /* SPLASH SCREEN */
+    .splash {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, #3b0047, #1b001f);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        animation: fadeIn 0.8s ease;
+    }
+
+    .splash h1 {
+        font-size: 32px;
+        margin: 0;
+        color: #ffd34d;
+        animation: pop 1s ease;
+    }
+
+    .splash p {
+        margin: 10px 0 25px;
+        font-size: 16px;
+        opacity: 0.9;
+    }
+
+    .splash button {
+        background: linear-gradient(135deg, #ffcc00, #ff9900);
+        color: #3b0047;
+        padding: 14px 28px;
+        border: none;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 0 #c97c00;
+        transition: 0.2s;
+    }
+
+    .splash button:active {
+        transform: scale(0.95);
+        box-shadow: 0 3px 0 #c97c00;
+    }
+
+    @keyframes pop {
+        0% {transform: scale(0.8); opacity: 0;}
+        100% {transform: scale(1); opacity: 1;}
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    /* CONTAINER PRINCIPAL */
     .container {
         max-width: 480px;
         margin: auto;
         background: linear-gradient(180deg, #3b0047, #1b001f);
         min-height: 100vh;
         padding-bottom: 160px;
-        animation: fadeInPage 0.8s ease;
+        display: none;
+        animation: fadeUp 0.6s ease;
     }
 
-    @keyframes fadeInPage {
+    @keyframes fadeUp {
         from {opacity: 0; transform: translateY(20px);}
         to {opacity: 1; transform: translateY(0);}
     }
@@ -32,15 +88,9 @@
     /* HERO */
     .hero {
         width: 100%;
-        height: 260px;
+        height: 240px;
         background: url('acai-capa.png') center/cover no-repeat;
         position: relative;
-        animation: zoomIn 1s ease;
-    }
-
-    @keyframes zoomIn {
-        from {transform: scale(1.1);}
-        to {transform: scale(1);}
     }
 
     .hero-overlay {
@@ -55,25 +105,14 @@
         left: 15px;
         right: 15px;
         background: rgba(0,0,0,0.6);
-        padding: 14px;
-        border-radius: 14px;
+        padding: 12px;
+        border-radius: 12px;
         color: #ffd34d;
         font-size: 22px;
         font-weight: bold;
         text-align: center;
-        box-shadow: 0 0 10px rgba(255,211,77,0.3);
     }
 
-    /* DECOR ICONS */
-    .decor {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 10px 0 0;
-        font-size: 22px;
-    }
-
-    /* SECTIONS */
     .section {
         padding: 20px;
     }
@@ -90,21 +129,6 @@
         cursor: pointer;
         transition: 0.2s;
         box-shadow: 0 6px 0 #c97c00;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .menu-button::after {
-        content: "🍓🍌🍫";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 0.3;
-    }
-
-    .menu-button:hover {
-        filter: brightness(1.05);
     }
 
     .menu-button:active {
@@ -140,19 +164,8 @@
         border-bottom: none;
     }
 
-    .item-name {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .item-price {
-        width: 70px;
-        text-align: right;
-        font-weight: bold;
-        color: #2b0033;
-    }
+    .item-name { flex: 1; }
+    .item-price { width: 70px; text-align: right; font-weight: bold; }
 
     .btn-add {
         margin-left: 10px;
@@ -163,13 +176,6 @@
         font-size: 13px;
         cursor: pointer;
         border: none;
-        transition: 0.15s;
-        box-shadow: 0 3px 0 #1b001f;
-    }
-
-    .btn-add:active {
-        transform: scale(0.9);
-        box-shadow: 0 1px 0 #1b001f;
     }
 
     /* CARRINHO */
@@ -185,13 +191,6 @@
         cursor: pointer;
         box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         z-index: 10;
-        animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-        0% {transform: scale(1);}
-        50% {transform: scale(1.05);}
-        100% {transform: scale(1);}
     }
 
     .cart-box {
@@ -207,13 +206,7 @@
         padding: 15px;
         display: none;
         box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        animation: slideUp 0.4s ease;
         z-index: 10;
-    }
-
-    @keyframes slideUp {
-        from {transform: translateY(30px); opacity: 0;}
-        to {transform: translateY(0); opacity: 1;}
     }
 
     .cart-item {
@@ -225,17 +218,10 @@
         font-size: 14px;
     }
 
-    .cart-item:last-child {
-        border-bottom: none;
-    }
+    .cart-item:last-child { border-bottom: none; }
 
     .cart-name { flex: 1; }
-
-    .cart-price {
-        width: 70px;
-        text-align: right;
-        font-weight: bold;
-    }
+    .cart-price { width: 70px; text-align: right; font-weight: bold; }
 
     .remove-btn {
         margin-left: 10px;
@@ -264,60 +250,49 @@
         text-align: center;
         font-weight: bold;
         cursor: pointer;
-        box-shadow: 0 4px 0 #128c44;
-    }
-
-    .btn-finish:active {
-        transform: scale(0.96);
-        box-shadow: 0 2px 0 #128c44;
     }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- SPLASH -->
+<div class="splash" id="splash">
+    <h1>🍧 Bem-vindo</h1>
+    <p>Faça o seu pedido agora</p>
+    <button onclick="enterApp()">FAÇA SEU PEDIDO</button>
+</div>
 
-    <!-- HERO -->
+<!-- APP -->
+<div class="container" id="app">
+
     <div class="hero">
         <div class="hero-overlay"></div>
-        <div class="hero-title">🍧 Conveniência do Açaí • Rabikas Burguer</div>
+        <div class="hero-title">Conveniência do Açaí</div>
     </div>
-
-    <div class="decor">🍓 🍌 🍫 🥜 🍯</div>
 
     <div class="section">
 
-        <!-- TAMANHOS -->
         <div class="menu-button" onclick="toggleBox('sizesBox')">🍧 Tamanhos de Açaí</div>
         <div class="content-box" id="sizesBox">
-            <div class="item"><span class="item-name">🍧 300ml</span><span class="item-price">R$ 12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍧 400ml</span><span class="item-price">R$ 15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍧 500ml</span><span class="item-price">R$ 18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">Adicionar</button></div>
+            <div class="item"><span class="item-name">300ml</span><span class="item-price">R$ 12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
+            <div class="item"><span class="item-name">400ml</span><span class="item-price">R$ 15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">Adicionar</button></div>
+            <div class="item"><span class="item-name">500ml</span><span class="item-price">R$ 18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">Adicionar</button></div>
         </div>
 
-        <!-- ACOMPANHAMENTOS -->
         <div class="menu-button" onclick="toggleBox('extrasBox')">🍓 Acompanhamentos</div>
         <div class="content-box" id="extrasBox">
-            <div class="item"><span class="item-name">🥜 Paçoca</span><span class="item-price">R$ 2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🥛 Leite em pó</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🌾 Granola</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍓 Morango</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍫 M&M</span><span class="item-price">R$ 3,00</span><button class="btn-add" onclick="addToCart('M&M',3)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍫 Ouro Branco</span><span class="item-price">R$ 3,00</span><button class="btn-add" onclick="addToCart('Ouro Branco',3)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍌 Banana</span><span class="item-price">R$ 2,00</span><button class="btn-add" onclick="addToCart('Banana',2)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍫 Sonho de Valsa</span><span class="item-price">R$ 3,00</span><button class="btn-add" onclick="addToCart('Sonho de Valsa',3)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍯 Leite Condensado</span><span class="item-price">R$ 3,00</span><button class="btn-add" onclick="addToCart('Leite Condensado',3)">Adicionar</button></div>
-            <div class="item"><span class="item-name">🍫 Nutella</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Paçoca</span><span class="item-price">R$ 2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Leite em pó</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Granola</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Morango</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">Adicionar</button></div>
         </div>
 
     </div>
 </div>
 
-<!-- BOTÃO CARRINHO -->
 <div class="cart-button" onclick="toggleCart()">🛒 Carrinho</div>
 
-<!-- CARRINHO -->
 <div class="cart-box" id="cartBox">
     <div id="cartItems"></div>
     <div class="total" id="totalValue">Total: R$ 0,00</div>
@@ -326,6 +301,11 @@
 
 <script>
     let cart = [];
+
+    function enterApp() {
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+    }
 
     function toggleBox(id) {
         const box = document.getElementById(id);
