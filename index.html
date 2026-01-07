@@ -22,28 +22,28 @@
             padding-bottom: 140px;
         }
 
-        /* TOPO COM IMAGEM */
-        .header-bg {
+        /* TELA INICIAL COM IMAGEM */
+        .hero {
             width: 100%;
-            height: 230px;
+            height: 260px;
             background: url('acai-capa.png') center/cover no-repeat;
             position: relative;
         }
 
-        .header-overlay {
+        .hero-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
         }
 
-        .header-title {
+        .hero-title {
             position: absolute;
             bottom: 15px;
             left: 15px;
             right: 15px;
             background: rgba(0,0,0,0.55);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             color: #ffc400;
             font-size: 22px;
             font-weight: bold;
@@ -200,10 +200,10 @@
 
 <div class="container">
 
-    <!-- TOPO -->
-    <div class="header-bg">
-        <div class="header-overlay"></div>
-        <div class="header-title">Açaí no Copo • Rabikas Burguer</div>
+    <!-- HERO / TELA INICIAL -->
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-title">Açaí no Copo • Rabikas Burguer</div>
     </div>
 
     <div class="section">
@@ -255,6 +255,7 @@
     function addToCart(name, price) {
         cart.push({ name, price });
         updateCart();
+        openCart(); // ABRE O CARRINHO AUTOMATICAMENTE
     }
 
     function removeFromCart(index) {
@@ -284,6 +285,10 @@
     function toggleCart() {
         const cartBox = document.getElementById("cartBox");
         cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
+    }
+
+    function openCart() {
+        document.getElementById("cartBox").style.display = "block";
     }
 
     function finishOrder() {
