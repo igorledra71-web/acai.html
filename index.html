@@ -27,9 +27,10 @@ body {
     text-align: center;
 }
 .splash h1 {
-    font-size: 34px;
+    font-size: 36px;
     margin: 0;
     color: #ffd34d;
+    letter-spacing: 1px;
 }
 .splash p {
     margin: 10px 0 30px;
@@ -63,16 +64,20 @@ body {
     text-align: center;
 }
 
-/* TOPO */
-.header-title {
-    background: linear-gradient(135deg, #ffcc00, #ff9900);
-    color: #3b0047;
-    padding: 14px;
-    border-radius: 16px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+/* NOME DA CONVENIÊNCIA (DESTAQUE) */
+.brand-title {
+    font-size: 30px;
+    font-weight: 900;
+    color: #ffd34d;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+.brand-subtitle {
+    font-size: 14px;
+    opacity: 0.9;
     margin-bottom: 15px;
 }
 
@@ -250,11 +255,11 @@ body {
 <!-- APP -->
 <div class="container" id="app">
 
-    <div class="header-title">Conveniência do Açaí</div>
+    <div class="brand-title">Conveniência do Açaí</div>
+    <div class="brand-subtitle">Monte seu açaí do seu jeito</div>
 
     <div class="highlight-box">
-        <strong>Monte seu Açaí do seu jeito!</strong><br>
-        Escolha o tamanho, adicione acompanhamentos e finalize direto no WhatsApp 🚀
+        <strong>Promo de hoje:</strong> 500ml + 2 acompanhamentos por R$ 20,00 🔥
     </div>
 
     <div class="section">
@@ -292,7 +297,7 @@ body {
 <div class="cart-box" id="cartBox">
     <div id="cartItems"></div>
     <div class="total" id="totalValue">Total: R$ 0,00</div>
-    <div class="btn-finish" onclick="finishOrder()">Finalizar no WhatsApp</div>
+    <div class="btn-finish" onclick="finishOrder()">Finalizar Pedido</div>
 </div>
 
 <script>
@@ -357,7 +362,23 @@ function finishOrder() {
         return;
     }
 
-    let message = "Olá, gostaria de pedir:%0A";
+    let nome = prompt("Digite seu nome:");
+    if (!nome || nome.trim() === "") {
+        alert("O nome é obrigatório para finalizar o pedido.");
+        return;
+    }
+
+    let telefone = prompt("Digite seu número para contato (opcional):");
+
+    let message = "🟣 *NOVO PEDIDO - CONVENIÊNCIA DO AÇAÍ*%0A";
+    message += "Cliente: " + nome + "%0A";
+
+    if (telefone && telefone.trim() !== "") {
+        message += "Contato: " + telefone + "%0A";
+    }
+
+    message += "%0AItens:%0A";
+
     let total = 0;
 
     cart.forEach(item => {
@@ -367,7 +388,7 @@ function finishOrder() {
 
     const obs = document.getElementById("obs").value;
     if (obs.trim() !== "") {
-        message += "%0AObservações: " + obs;
+        message += "%0AObservações: " + obs + "%0A";
     }
 
     message += "%0ATotal: R$ " + total.toFixed(2).replace('.', ',');
