@@ -47,10 +47,7 @@ body {
     cursor: pointer;
     box-shadow: 0 6px 0 #c97c00;
 }
-.splash button:active {
-    transform: scale(0.95);
-    box-shadow: 0 3px 0 #c97c00;
-}
+.splash button:active { transform: scale(0.95); }
 
 /* APP */
 .container {
@@ -58,7 +55,7 @@ body {
     margin: auto;
     background: linear-gradient(180deg, #3b0047, #1b001f);
     min-height: 100vh;
-    padding: 20px 15px 20px;
+    padding: 20px 15px 40px;
     display: none;
     text-align: center;
 }
@@ -68,12 +65,9 @@ body {
     font-size: 30px;
     font-weight: 900;
     color: #ffd34d;
-    letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: 5px;
-    text-shadow: 0 3px 8px rgba(0,0,0,0.5);
 }
-
 .brand-subtitle {
     font-size: 14px;
     opacity: 0.9;
@@ -93,17 +87,13 @@ body {
     color: #3b0047;
     padding: 16px;
     border-radius: 18px;
-    text-align: center;
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 15px;
     cursor: pointer;
     box-shadow: 0 6px 0 #c97c00;
 }
-.menu-button:active {
-    transform: scale(0.96);
-    box-shadow: 0 3px 0 #c97c00;
-}
+.menu-button:active { transform: scale(0.96); }
 
 .content-box {
     width: 100%;
@@ -121,7 +111,6 @@ body {
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px dashed #ddd;
-    font-size: 15px;
 }
 .item:last-child { border-bottom: none; }
 
@@ -139,7 +128,7 @@ body {
     border: none;
 }
 
-/* OBSERVAÇÃO */
+/* OBS */
 .obs-box {
     width: 100%;
     margin-bottom: 25px;
@@ -154,29 +143,30 @@ body {
     resize: none;
 }
 
-/* CARRINHO FIXO NO RODAPÉ */
+/* CARRINHO */
 .cart-footer {
     width: 100%;
     background: #ffffff;
     color: #3b0047;
-    border-top: 3px solid #ffd34d;
-    padding: 15px;
-    margin-top: 30px;
-    border-radius: 20px 20px 0 0;
+    border-top: 4px solid #ffd34d;
+    padding: 18px 15px;
+    margin-top: 25px;
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.4);
 }
 
 .cart-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 17px;
 }
 
 .cart-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 6px 0;
-    border-bottom: 1px dashed #ddd;
-    font-size: 14px;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ccc;
 }
 .cart-item:last-child { border-bottom: none; }
 
@@ -184,7 +174,7 @@ body {
 .cart-price { width: 70px; text-align: right; font-weight: bold; }
 
 .remove-btn {
-    margin-left: 10px;
+    margin-left: 8px;
     background: #e60000;
     color: #fff;
     border: none;
@@ -195,21 +185,22 @@ body {
 }
 
 .total {
-    margin-top: 10px;
+    margin-top: 12px;
     font-weight: bold;
     text-align: right;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .btn-finish {
-    margin-top: 12px;
+    margin-top: 14px;
     background: linear-gradient(135deg, #25D366, #1ebe57);
     color: #fff;
-    padding: 14px;
+    padding: 15px;
     border-radius: 14px;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+    font-size: 16px;
 }
 </style>
 </head>
@@ -231,7 +222,6 @@ body {
 
     <div class="section">
 
-        <!-- TAMANHOS -->
         <div class="menu-button" onclick="toggleBox('sizesBox')">🍧 Tamanhos de Açaí</div>
         <div class="content-box" id="sizesBox">
             <div class="item"><span class="item-name">300ml</span><span class="item-price">R$ 12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
@@ -239,7 +229,6 @@ body {
             <div class="item"><span class="item-name">500ml</span><span class="item-price">R$ 18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">Adicionar</button></div>
         </div>
 
-        <!-- ACOMPANHAMENTOS -->
         <div class="menu-button" onclick="toggleBox('extrasBox')">🍓 Acompanhamentos</div>
         <div class="content-box" id="extrasBox">
             <div class="item"><span class="item-name">Paçoca</span><span class="item-price">R$ 2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">Adicionar</button></div>
@@ -250,14 +239,13 @@ body {
             <div class="item"><span class="item-name">Nutella</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">Adicionar</button></div>
         </div>
 
-        <!-- OBSERVAÇÃO -->
         <div class="obs-box">
             <textarea id="obs" placeholder="Observações do pedido (ex: sem banana, pouco leite, bem gelado...)"></textarea>
         </div>
 
     </div>
 
-    <!-- CARRINHO NO RODAPÉ -->
+    <!-- CARRINHO -->
     <div class="cart-footer" id="cartFooter" style="display:none;">
         <div class="cart-title">🛒 Seu Carrinho</div>
         <div id="cartItems"></div>
@@ -291,8 +279,8 @@ function removeFromCart(index) {
 }
 
 function updateCart() {
-    const cartItemsDiv = document.getElementById("cartItems");
     const cartFooter = document.getElementById("cartFooter");
+    const cartItemsDiv = document.getElementById("cartItems");
     cartItemsDiv.innerHTML = "";
     let total = 0;
 
@@ -307,52 +295,66 @@ function updateCart() {
         `;
     });
 
-    document.getElementById("totalValue").innerText = "Total: R$ " + total.toFixed(2).replace('.', ',');
+    document.getElementById("totalValue").innerText =
+        "Total: R$ " + total.toFixed(2).replace('.', ',');
 
-    if (cart.length === 0) {
-        cartFooter.style.display = "none";
-    } else {
-        cartFooter.style.display = "block";
-    }
+    cartFooter.style.display = cart.length > 0 ? "block" : "none";
 }
 
 function finishOrder() {
-    if (cart.length === 0) {
-        alert("Seu carrinho está vazio!");
-        return;
-    }
-
     let nome = prompt("Digite seu nome:");
     if (!nome || nome.trim() === "") {
-        alert("O nome é obrigatório para finalizar o pedido.");
+        alert("O nome é obrigatório.");
         return;
     }
 
-    let telefone = prompt("Digite seu número para contato (opcional):");
+    let telefone = prompt("Número para contato (opcional):");
+    let entrega = confirm("O pedido é para ENTREGA? (OK = Sim | Cancelar = Retirar no local)");
 
-    let message = "🟣 *NOVO PEDIDO - CONVENIÊNCIA DO AÇAÍ*%0A";
-    message += "Cliente: " + nome + "%0A";
-
-    if (telefone && telefone.trim() !== "") {
-        message += "Contato: " + telefone + "%0A";
+    let endereco = "";
+    if (entrega) {
+        endereco = prompt("Digite o endereço de entrega:");
+        if (!endereco || endereco.trim() === "") {
+            alert("Endereço é obrigatório para entrega.");
+            return;
+        }
     }
 
-    message += "%0AItens:%0A";
+    let pagamento = prompt("Forma de pagamento? (Pix, Dinheiro, Cartão)");
+
+    if (!pagamento || pagamento.trim() === "") {
+        alert("Informe a forma de pagamento.");
+        return;
+    }
+
+    let msg = "🟣 *NOVO PEDIDO - CONVENIÊNCIA DO AÇAÍ*%0A";
+    msg += "Cliente: " + nome + "%0A";
+
+    if (telefone && telefone.trim() !== "") {
+        msg += "Contato: " + telefone + "%0A";
+    }
+
+    if (entrega) {
+        msg += "Entrega em: " + endereco + "%0A";
+    } else {
+        msg += "Retirada no local%0A";
+    }
+
+    msg += "Pagamento: " + pagamento + "%0A";
+    msg += "%0AItens:%0A";
 
     let total = 0;
-    cart.forEach(item => {
-        message += "- " + item.name + " (R$ " + item.price.toFixed(2).replace('.', ',') + ")%0A";
-        total += item.price;
+    cart.forEach(i => {
+        msg += "- " + i.name + " (R$ " + i.price.toFixed(2).replace('.', ',') + ")%0A";
+        total += i.price;
     });
 
     const obs = document.getElementById("obs").value;
-    if (obs.trim() !== "") {
-        message += "%0AObservações: " + obs + "%0A";
-    }
+    if (obs.trim() !== "") msg += "%0AObs: " + obs + "%0A";
 
-    message += "%0ATotal: R$ " + total.toFixed(2).replace('.', ',');
+    msg += "%0ATotal: R$ " + total.toFixed(2).replace('.', ',');
 
-    window.open("https://wa.me/5599991789706?text=" + message, "_blank");
+    window.open("https://wa.me/554991789706?text=" + msg, "_blank");
 }
 </script>
 
