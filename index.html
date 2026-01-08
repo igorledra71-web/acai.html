@@ -8,379 +8,275 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #1b001f;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
+body{
+    margin:0;
+    background:#1b001f;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
 }
 
 /* SPLASH */
-.splash {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top, #4b005c, #1b001f);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    text-align: center;
-    padding: 20px;
+.splash{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top,#4b005c,#1b001f);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:100;
 }
 
-.brand-3d {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    color: #ffd34d;
-    text-transform: uppercase;
+.brand-3d{
+    font-family:'Montserrat',sans-serif;
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#ffd34d;
+    text-transform:uppercase;
     text-shadow:
         1px 1px 0 #c98c00,
         2px 2px 0 #b37a00,
         3px 3px 0 #9c6800,
-        4px 4px 0 #855600,
-        5px 5px 12px rgba(0,0,0,0.6);
-    margin-bottom: 10px;
+        4px 4px 12px rgba(0,0,0,.6);
+    margin-bottom:10px;
 }
 
-.brand-sub {
-    font-size: 14px;
-    opacity: 0.9;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-.splash button {
-    background: linear-gradient(135deg, #ffcc00, #ff9900);
-    color: #3b0047;
-    padding: 15px 36px;
-    border: none;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #c97c00;
-}
-.splash button:active {
-    transform: scale(0.95);
+.splash button{
+    background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#3b0047;
+    padding:15px 36px;
+    border:none;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 6px 0 #c97c00;
 }
 
 /* APP */
-.container {
-    max-width: 480px;
-    margin: auto;
-    background: linear-gradient(180deg, #3b0047, #1b001f);
-    min-height: 100vh;
-    padding: 20px 15px 40px;
-    display: none;
-    text-align: center;
+.container{
+    max-width:480px;
+    margin:auto;
+    min-height:100vh;
+    padding:20px 15px 40px;
+    display:none;
+    text-align:center;
+    background:linear-gradient(180deg,#3b0047,#1b001f);
 }
 
-/* TOPO APP */
-.brand-app {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    color: #ffd34d;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    text-shadow:
-        1px 1px 0 #c98c00,
-        2px 2px 0 #b37a00,
-        3px 3px 0 #9c6800,
-        4px 4px 10px rgba(0,0,0,0.5);
+.brand-app{
+    font-family:'Montserrat',sans-serif;
+    font-size:32px;
+    font-weight:900;
+    color:#ffd34d;
+    text-transform:uppercase;
+    text-shadow:1px 1px 0 #c98c00,2px 2px 0 #b37a00,3px 3px 10px rgba(0,0,0,.5);
 }
 
-.brand-app-sub {
-    font-size: 14px;
-    opacity: 0.9;
-    margin-bottom: 20px;
+.brand-sub{
+    font-size:14px;
+    opacity:.9;
+    margin-bottom:20px;
 }
 
-/* SEÇÕES */
-.section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.menu-button{
+    width:100%;
+    background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#3b0047;
+    padding:16px;
+    border-radius:18px;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+    cursor:pointer;
+    box-shadow:0 6px 0 #c97c00;
 }
 
-.menu-button {
-    width: 100%;
-    background: linear-gradient(135deg, #ffcc00, #ff9900);
-    color: #3b0047;
-    padding: 16px;
-    border-radius: 18px;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #c97c00;
-}
-.menu-button:active { transform: scale(0.96); }
-
-.content-box {
-    width: 100%;
-    background: #fff;
-    color: #3b0047;
-    border-radius: 18px;
-    padding: 15px;
-    margin-bottom: 25px;
-    display: none;
+.content-box{
+    width:100%;
+    background:#fff;
+    color:#3b0047;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:25px;
+    display:none;
 }
 
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px dashed #ddd;
+.item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0;
+    border-bottom:1px dashed #ddd;
 }
-.item:last-child { border-bottom: none; }
+.item:last-child{border-bottom:none}
 
-.item-name { flex: 1; text-align: left; }
-.item-price { width: 70px; text-align: right; font-weight: bold; }
+.item-name{flex:1;text-align:left}
+.item-price{width:70px;text-align:right;font-weight:bold}
 
-.btn-add {
-    margin-left: 10px;
-    background: linear-gradient(135deg, #5a0070, #2b0033);
-    color: #fff;
-    padding: 7px 14px;
-    border-radius: 12px;
-    font-size: 13px;
-    cursor: pointer;
-    border: none;
+.btn-add{
+    margin-left:10px;
+    background:linear-gradient(135deg,#5a0070,#2b0033);
+    color:#fff;
+    padding:7px 14px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
 }
 
 /* OBS */
-.obs-box {
-    width: 100%;
-    margin-bottom: 25px;
-}
-.obs-box textarea {
-    width: 100%;
-    height: 80px;
-    border-radius: 12px;
-    border: none;
-    padding: 10px;
-    font-size: 14px;
-    resize: none;
+.obs-box textarea{
+    width:100%;
+    height:80px;
+    border-radius:12px;
+    border:none;
+    padding:10px;
+    margin-bottom:20px;
 }
 
 /* CARRINHO */
-.cart-footer {
-    width: 100%;
-    background: #ffffff;
-    color: #3b0047;
-    border-top: 4px solid #ffd34d;
-    padding: 18px 15px;
-    margin-top: 25px;
-    border-radius: 22px 22px 0 0;
-    box-shadow: 0 -6px 20px rgba(0,0,0,0.4);
+.cart-footer{
+    background:#fff;
+    color:#3b0047;
+    border-top:4px solid #ffd34d;
+    padding:18px 15px;
+    border-radius:22px 22px 0 0;
+    box-shadow:0 -6px 20px rgba(0,0,0,.4);
+    display:none;
 }
 
-.cart-title {
-    font-weight: bold;
-    margin-bottom: 12px;
-    font-size: 17px;
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 0;
+    border-bottom:1px dashed #ccc;
+}
+.cart-item:last-child{border-bottom:none}
+
+.remove-btn{
+    background:#e60000;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:4px 8px;
+    cursor:pointer;
 }
 
-.cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px dashed #ccc;
-}
-.cart-item:last-child { border-bottom: none; }
-
-.cart-name { flex: 1; text-align: left; }
-.cart-price { width: 70px; text-align: right; font-weight: bold; }
-
-.remove-btn {
-    margin-left: 8px;
-    background: #e60000;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 4px 8px;
-    cursor: pointer;
-    font-size: 12px;
+.total{
+    margin-top:10px;
+    font-weight:bold;
+    text-align:right;
 }
 
-.total {
-    margin-top: 12px;
-    font-weight: bold;
-    text-align: right;
-    font-size: 17px;
-}
-
-.btn-finish {
-    margin-top: 14px;
-    background: linear-gradient(135deg, #25D366, #1ebe57);
-    color: #fff;
-    padding: 15px;
-    border-radius: 14px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
+.btn-finish{
+    margin-top:14px;
+    background:linear-gradient(135deg,#25D366,#1ebe57);
+    color:#fff;
+    padding:15px;
+    border-radius:14px;
+    font-weight:bold;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SPLASH -->
 <div class="splash" id="splash">
     <div class="brand-3d">Rabikas Burguer</div>
-    <div class="brand-sub">Conveniência • Açaí • Delivery</div>
     <button onclick="enterApp()">FAZER PEDIDO</button>
 </div>
 
-<!-- APP -->
 <div class="container" id="app">
-
     <div class="brand-app">Rabikas Burguer</div>
-    <div class="brand-app-sub">Monte seu açaí do seu jeito</div>
+    <div class="brand-sub">Açaí no Copo</div>
 
-    <div class="section">
-
-        <div class="menu-button" onclick="toggleBox('sizesBox')">🍧 Tamanhos de Açaí</div>
-        <div class="content-box" id="sizesBox">
-            <div class="item"><span class="item-name">300ml</span><span class="item-price">R$ 12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
-            <div class="item"><span class="item-name">400ml</span><span class="item-price">R$ 15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">Adicionar</button></div>
-            <div class="item"><span class="item-name">500ml</span><span class="item-price">R$ 18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">Adicionar</button></div>
-        </div>
-
-        <div class="menu-button" onclick="toggleBox('extrasBox')">🍓 Acompanhamentos</div>
-        <div class="content-box" id="extrasBox">
-            <div class="item"><span class="item-name">Paçoca</span><span class="item-price">R$ 2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">Adicionar</button></div>
-            <div class="item"><span class="item-name">Leite em pó</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">Adicionar</button></div>
-            <div class="item"><span class="item-name">Granola</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">Adicionar</button></div>
-            <div class="item"><span class="item-name">Morango</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">Adicionar</button></div>
-            <div class="item"><span class="item-name">Banana</span><span class="item-price">R$ 2,00</span><button class="btn-add" onclick="addToCart('Banana',2)">Adicionar</button></div>
-            <div class="item"><span class="item-name">Nutella</span><span class="item-price">R$ 4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">Adicionar</button></div>
-        </div>
-
-        <div class="obs-box">
-            <textarea id="obs" placeholder="Observações do pedido (ex: sem banana, pouco leite, bem gelado...)"></textarea>
-        </div>
-
+    <div class="menu-button" onclick="toggleBox('sizesBox')">🍧 Tamanhos</div>
+    <div class="content-box" id="sizesBox">
+        <div class="item"><span class="item-name">300ml</span><span class="item-price">R$12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
+        <div class="item"><span class="item-name">400ml</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">500ml</span><span class="item-price">R$18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">Adicionar</button></div>
     </div>
 
-    <!-- CARRINHO -->
-    <div class="cart-footer" id="cartFooter" style="display:none;">
-        <div class="cart-title">🛒 Seu Carrinho</div>
+    <div class="menu-button" onclick="toggleBox('extrasBox')">🍓 Acompanhamentos</div>
+    <div class="content-box" id="extrasBox">
+        <div class="item"><span class="item-name">Paçoca</span><span class="item-price">R$2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Leite em pó</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Granola</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Morango</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">Adicionar</button></div>
+        <div class="item"><span class="item-name">M&M</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('M&M',3)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Ouro Branco</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('Ouro Branco',3)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Banana</span><span class="item-price">R$2,00</span><button class="btn-add" onclick="addToCart('Banana',2)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Sonho/Valsa</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('Sonho/Valsa',3)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Leite Condensado</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('Leite Condensado',3)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Nutella</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">Adicionar</button></div>
+    </div>
+
+    <div class="obs-box">
+        <textarea id="obs" placeholder="Observações do pedido"></textarea>
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
         <div id="cartItems"></div>
-        <div class="total" id="totalValue">Total: R$ 0,00</div>
+        <div class="total" id="totalValue">Total: R$0,00</div>
         <div class="btn-finish" onclick="finishOrder()">Finalizar Pedido</div>
     </div>
-
 </div>
 
 <script>
-let cart = [];
+let cart=[];
 
-function enterApp() {
-    document.getElementById('splash').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
+function enterApp(){
+    splash.style.display='none';
+    app.style.display='block';
 }
 
-function toggleBox(id) {
-    const box = document.getElementById(id);
-    box.style.display = box.style.display === "block" ? "none" : "block";
+function toggleBox(id){
+    let b=document.getElementById(id);
+    b.style.display=b.style.display==='block'?'none':'block';
 }
 
-function addToCart(name, price) {
-    cart.push({ name, price });
+function addToCart(name,price){
+    cart.push({name,price});
     updateCart();
 }
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
+function removeFromCart(i){
+    cart.splice(i,1);
     updateCart();
 }
 
-function updateCart() {
-    const cartFooter = document.getElementById("cartFooter");
-    const cartItemsDiv = document.getElementById("cartItems");
-    cartItemsDiv.innerHTML = "";
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        total += item.price;
-        cartItemsDiv.innerHTML += `
-            <div class="cart-item">
-                <span class="cart-name">${item.name}</span>
-                <span class="cart-price">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
-                <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
-            </div>
-        `;
+function updateCart(){
+    let box=document.getElementById('cartItems');
+    box.innerHTML='';
+    let total=0;
+    cart.forEach((i,n)=>{
+        total+=i.price;
+        box.innerHTML+=`<div class="cart-item">
+            <span>${i.name}</span>
+            <span>R$${i.price},00</span>
+            <button class="remove-btn" onclick="removeFromCart(${n})">X</button>
+        </div>`;
     });
-
-    document.getElementById("totalValue").innerText =
-        "Total: R$ " + total.toFixed(2).replace('.', ',');
-
-    cartFooter.style.display = cart.length > 0 ? "block" : "none";
+    totalValue.innerText='Total: R$ '+total+',00';
+    cartFooter.style.display=cart.length?'block':'none';
 }
 
-function finishOrder() {
-    let nome = prompt("Digite seu nome:");
-    if (!nome || nome.trim() === "") {
-        alert("O nome é obrigatório.");
-        return;
-    }
-
-    let telefone = prompt("Número para contato (opcional):");
-    let entrega = confirm("O pedido é para ENTREGA? (OK = Sim | Cancelar = Retirar no local)");
-
-    let endereco = "";
-    if (entrega) {
-        endereco = prompt("Digite o endereço de entrega:");
-        if (!endereco || endereco.trim() === "") {
-            alert("Endereço é obrigatório para entrega.");
-            return;
-        }
-    }
-
-    let pagamento = prompt("Forma de pagamento? (Pix, Dinheiro, Cartão)");
-    if (!pagamento || pagamento.trim() === "") {
-        alert("Informe a forma de pagamento.");
-        return;
-    }
-
-    let msg = "🟣 *NOVO PEDIDO - RABIKAS BURGUER*%0A";
-    msg += "Cliente: " + nome + "%0A";
-
-    if (telefone && telefone.trim() !== "") {
-        msg += "Contato: " + telefone + "%0A";
-    }
-
-    if (entrega) {
-        msg += "Entrega em: " + endereco + "%0A";
-    } else {
-        msg += "Retirada no local%0A";
-    }
-
-    msg += "Pagamento: " + pagamento + "%0A";
-    msg += "%0AItens:%0A";
-
-    let total = 0;
-    cart.forEach(i => {
-        msg += "- " + i.name + " (R$ " + i.price.toFixed(2).replace('.', ',') + ")%0A";
-        total += i.price;
-    });
-
-    const obs = document.getElementById("obs").value;
-    if (obs.trim() !== "") msg += "%0AObs: " + obs + "%0A";
-
-    msg += "%0ATotal: R$ " + total.toFixed(2).replace('.', ',');
-
-    window.open("https://wa.me/554991789706?text=" + msg, "_blank");
+function finishOrder(){
+    let nome=prompt("Seu nome:");
+    if(!nome)return;
+    let entrega=confirm("Entrega?");
+    let endereco=entrega?prompt("Endereço:"):"Retirada no local";
+    let pagamento=prompt("Forma de pagamento:");
+    let msg=`NOVO PEDIDO - RABIKAS BURGUER\nCliente: ${nome}\n${entrega?'Endereço: '+endereco:'Retirada'}\nPagamento: ${pagamento}\n\nItens:\n`;
+    let total=0;
+    cart.forEach(i=>{msg+=`- ${i.name} R$${i.price}\n`;total+=i.price;});
+    msg+=`\nTotal: R$${total}`;
+    if(obs.value)msg+=`\nObs: ${obs.value}`;
+    window.open(`https://wa.me/554991789706?text=${encodeURIComponent(msg)}`);
 }
 </script>
 
