@@ -5,8 +5,9 @@
 <title>Rabikas Burguer • Cardápio Digital</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Anton&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
 *{box-sizing:border-box;}
 
 body{
@@ -14,6 +15,45 @@ body{
     background:linear-gradient(180deg,#2b0033,#120016);
     font-family:Arial,Helvetica,sans-serif;
     color:#fff;
+}
+
+/* SPLASH */
+.splash{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top,#5a0070,#1b001f);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:999;
+    padding:20px;
+}
+
+.splash-title{
+    font-family:'Anton',sans-serif;
+    font-size:42px;
+    letter-spacing:3px;
+    color:#ffd34d;
+    text-transform:uppercase;
+    text-shadow:
+        2px 2px 0 #c98c00,
+        4px 4px 0 #b37a00,
+        6px 6px 12px rgba(0,0,0,.6);
+    margin-bottom:20px;
+}
+
+.splash button{
+    background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#3b0047;
+    padding:18px 46px;
+    border:none;
+    border-radius:60px;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 8px 0 #c97c00;
 }
 
 /* BANNER FECHANDO */
@@ -37,6 +77,7 @@ body{
     min-height:100vh;
     padding:20px 12px 200px;
     text-align:center;
+    display:none;
 }
 
 /* HEADER */
@@ -53,7 +94,7 @@ body{
 }
 .brand-sub{font-size:13px; opacity:.85; margin-bottom:20px;}
 
-/* CATEGORY BUTTON */
+/* CATEGORY */
 .category-btn{
     width:100%;
     background:linear-gradient(135deg,#ffcc00,#ff9900);
@@ -70,7 +111,7 @@ body{
     justify-content:space-between;
 }
 
-/* SUB BUTTON (AÇAÍ) */
+/* SUB BUTTON */
 .sub-btn{
     width:100%;
     background:linear-gradient(135deg,#ffd34d,#ffb800);
@@ -196,8 +237,15 @@ body{
 
 <body>
 
+<!-- SPLASH -->
+<div class="splash" id="splash">
+    <div class="splash-title">Rabikas Burguer</div>
+    <button onclick="enterApp()">FAÇA SEU PEDIDO</button>
+</div>
+
 <div class="closing-banner" id="closingBanner">⚠️ Atenção: fechamos em 10 minutos!</div>
 
+<!-- APP -->
 <div class="container" id="app">
 
     <div class="brand-app">Rabikas Burguer</div>
@@ -309,22 +357,25 @@ let deliveryFee = 8.00;
 let isDelivery = false;
 let deliveryAddress = "";
 
-/* VERIFICA SE ESTÁ ABERTO AGORA */
+/* ENTRAR NO APP */
+function enterApp(){
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+}
+
+/* HORÁRIO */
 function isOpenNow(){
     const now = new Date();
-    const day = now.getDay(); // 0=Dom,1=Seg,2=Ter,3=Qua,4=Qui,5=Sex,6=Sáb
+    const day = now.getDay();
     const hour = now.getHours();
     const minute = now.getMinutes();
     const currentTime = hour + minute / 60;
 
-    // Segunda fechado
-    if(day === 1) return false;
-
-    const openTime = 18.5; // 18:30
-    const closeTime = 22.5; // 22:30
+    if(day === 1) return false; // segunda fechado
+    const openTime = 18.5;
+    const closeTime = 22.5;
 
     if(currentTime < openTime || currentTime > closeTime) return false;
-
     return true;
 }
 
