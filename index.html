@@ -15,8 +15,42 @@ body{
     color:#fff;
     display:flex;
     justify-content:center;
+    overflow:hidden;
 }
-.container{
+
+/* SPLASH */
+#splashScreen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(180deg,#120016,#2b0033);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+.splash-title{
+    font-family:'Montserrat',sans-serif;
+    font-size:48px;
+    font-weight:900;
+    color:#ffd34d;
+    text-shadow:2px 2px 0 #c98c00,4px 4px 0 #b37a00;
+    animation:zoomIn 1.2s ease;
+}
+.splash-btn{
+    margin-top:30px;
+    background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#3b0047;
+    padding:16px 40px;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:18px;
+    cursor:pointer;
+    animation:pulse 1.8s infinite;
+}
+
+/* APP */
+#appContainer{
     width:100%;
     max-width:420px;
     padding:20px 12px 240px;
@@ -24,7 +58,15 @@ body{
     display:flex;
     flex-direction:column;
     align-items:center;
+    opacity:0;
+    transform:scale(.96);
+    transition:all .6s ease;
 }
+#appContainer.show{
+    opacity:1;
+    transform:scale(1);
+}
+
 .brand-app{
     font-family:'Montserrat',sans-serif;
     font-size:34px;
@@ -128,12 +170,25 @@ body{
     margin-top:10px;
     cursor:pointer;
 }
+
+/* ANIMAÇÕES */
+@keyframes zoomIn{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+.fade-out{animation:fadeOut .6s forwards;}
+@keyframes fadeOut{to{opacity:0;transform:scale(.9);}}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- SPLASH -->
+<div id="splashScreen">
+    <div class="splash-title">Rabikas Burguer</div>
+    <div class="splash-btn" onclick="enterApp()">FAZER PEDIDO</div>
+</div>
+
+<!-- APP -->
+<div id="appContainer">
 
 <div class="brand-app">Rabikas Burguer</div>
 <div class="brand-sub">Cardápio Digital</div>
@@ -182,10 +237,8 @@ body{
 <div class="item"><span>X-Da Casa</span><span>R$ 45,00</span><button class="btn-add" onclick="addToCart('X-Da Casa',45)">+</button></div>
 <div class="item"><span>X-Dog</span><span>R$ 20,00</span><button class="btn-add" onclick="addToCart('X-Dog',20)">+</button></div>
 
-<!-- ADICIONAIS PARA LANCHES (NOVO - conforme pedido) -->
 <div class="sub-btn" onclick="toggle('extrasLanche')">➕ Adicionais para Lanches</div>
 <div id="extrasLanche" class="content-box">
-
 <div class="item"><span>Calabresa</span><span>R$ 7,00</span><button class="btn-add" onclick="addToCart('Adicional Calabresa',7)">+</button></div>
 <div class="item"><span>Bacon</span><span>R$ 7,00</span><button class="btn-add" onclick="addToCart('Adicional Bacon',7)">+</button></div>
 <div class="item"><span>Coração</span><span>R$ 8,00</span><button class="btn-add" onclick="addToCart('Adicional Coração',8)">+</button></div>
@@ -195,7 +248,6 @@ body{
 <div class="item"><span>Cheddar</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Adicional Cheddar',4)">+</button></div>
 <div class="item"><span>Hambúrguer artesanal</span><span>R$ 10,00</span><button class="btn-add" onclick="addToCart('Hambúrguer artesanal extra',10)">+</button></div>
 <div class="item"><span>Maionese caseira</span><span>R$ 2,00</span><button class="btn-add" onclick="addToCart('Maionese caseira',2)">+</button></div>
-
 </div>
 </div>
 
@@ -250,6 +302,16 @@ body{
 <script>
 let cart=[];
 let isDelivery=false;
+
+function enterApp(){
+    const splash=document.getElementById("splashScreen");
+    const app=document.getElementById("appContainer");
+    splash.classList.add("fade-out");
+    setTimeout(()=>{
+        splash.style.display="none";
+        app.classList.add("show");
+    },600);
+}
 
 function toggle(id){
 const el=document.getElementById(id);
