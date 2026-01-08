@@ -150,6 +150,13 @@ body{
     margin-top:10px;
     cursor:pointer;
 }
+.delivery-box{
+    margin:10px 0;
+    padding:10px;
+    background:#f2f2f2;
+    border-radius:10px;
+}
+.total{font-weight:bold;text-align:right;margin-top:8px;}
 </style>
 </head>
 
@@ -206,19 +213,6 @@ body{
         <div class="item"><span>X-Tribom</span><span>R$32,00</span><button class="btn-add" onclick="addToCart('X-Tribom',32)">+</button></div>
         <div class="item"><span>X-Da Casa</span><span>R$45,00</span><button class="btn-add" onclick="addToCart('X-Da Casa',45)">+</button></div>
         <div class="item"><span>X-Dog</span><span>R$20,00</span><button class="btn-add" onclick="addToCart('X-Dog',20)">+</button></div>
-
-        <div class="sub-btn" onclick="toggle('adicionaisLanche')">➕ Adicionais do Lanche</div>
-        <div id="adicionaisLanche" class="content-box">
-            <div class="item"><span>Calabresa</span><span>R$7,00</span><button class="btn-add" onclick="addToCart('Adicional Calabresa',7)">+</button></div>
-            <div class="item"><span>Bacon</span><span>R$7,00</span><button class="btn-add" onclick="addToCart('Adicional Bacon',7)">+</button></div>
-            <div class="item"><span>Coração</span><span>R$8,00</span><button class="btn-add" onclick="addToCart('Adicional Coração',8)">+</button></div>
-            <div class="item"><span>Ovo</span><span>R$5,00</span><button class="btn-add" onclick="addToCart('Adicional Ovo',5)">+</button></div>
-            <div class="item"><span>Salsicha</span><span>R$4,00</span><button class="btn-add" onclick="addToCart('Adicional Salsicha',4)">+</button></div>
-            <div class="item"><span>Frango</span><span>R$7,00</span><button class="btn-add" onclick="addToCart('Adicional Frango',7)">+</button></div>
-            <div class="item"><span>Cheddar</span><span>R$4,00</span><button class="btn-add" onclick="addToCart('Adicional Cheddar',4)">+</button></div>
-            <div class="item"><span>Hambúrguer artesanal</span><span>R$10,00</span><button class="btn-add" onclick="addToCart('Hambúrguer artesanal extra',10)">+</button></div>
-            <div class="item"><span>Maionese caseira</span><span>R$2,00</span><button class="btn-add" onclick="addToCart('Maionese caseira',2)">+</button></div>
-        </div>
     </div>
 
     <!-- PASTÉIS -->
@@ -259,13 +253,23 @@ body{
 
 <div class="cart-footer" id="cartFooter">
     <div id="cartItems"></div>
-    <div id="total"></div>
-    <div class="btn-finish" onclick="finish()">Finalizar Pedido</div>
+
+    <div class="delivery-box">
+        <label><input type="radio" name="entrega" checked onchange="setDelivery(false)"> Retirada</label>
+        <label><input type="radio" name="entrega" onchange="setDelivery(true)"> Entrega (+ R$ 8,00)</label>
+    </div>
+
+    <div class="total" id="totalValue">Total: R$ 0,00</div>
+    <div class="btn-finish" onclick="finishOrder()">Finalizar Pedido</div>
 </div>
 
 <script>
 let cart=[];
+let isDelivery=false;
+let deliveryFee=8;
+let deliveryAddress="";
 
+/* SPLASH */
 function goToApp(){
     document.getElementById("splash").classList.add("hide");
     setTimeout(()=>{
@@ -274,13 +278,43 @@ function goToApp(){
     },600);
 }
 
+/* TOGGLE */
 function toggle(id){
     const el=document.getElementById(id);
     el.style.display=el.style.display==="block"?"none":"block";
 }
 
+/* HORÁRIO */
+function isOpenNow(){
+    const now=new Date();
+    const day=now.getDay(); // 0 dom,1 seg,2 ter...
+    const time=now.getHours()+now.getMinutes()/60;
+    if(day===1) return false;
+    if(time<18.5 || time>22.5) return false;
+    return true;
+}
+
+/* CARRINHO */
 function addToCart(name,price){
+    if(!isOpenNow()){
+        alert("⏰ Estamos fechados no momento.\nAtendemos de terça a domingo das 18:30 às 22:30.");
+        return;
+    }
     cart.push({name,price});
+    updateCart();
+}
+
+function setDelivery(v){
+    isDelivery=v;
+    if(isDelivery){
+        deliveryAddress=prompt("Digite o endereço para entrega:");
+        if(!deliveryAddress){
+            isDelivery=false;
+            document.querySelector("input[name='entrega']").checked=true;
+        }
+    }else{
+        deliveryAddress="";
+    }
     updateCart();
 }
 
@@ -288,20 +322,58 @@ function updateCart(){
     const box=document.getElementById("cartItems");
     box.innerHTML="";
     let total=0;
+
     cart.forEach((i,idx)=>{
         total+=i.price;
-        box.innerHTML+=`<div class="cart-item">
+        box.innerHTML+=`
+        <div class="cart-item">
             <span>${i.name}</span>
-            <span>R$ ${i.price.toFixed(2)}</span>
+            <span>R$ ${i.price.toFixed(2).replace('.',',')}</span>
             <button class="remove-btn" onclick="cart.splice(${idx},1);updateCart()">x</button>
         </div>`;
     });
-    document.getElementById("total").innerHTML="<b>Total: R$ "+total.toFixed(2)+"</b>";
+
+    if(isDelivery){
+        total+=deliveryFee;
+        box.innerHTML+=`
+        <div class="cart-item">
+            <strong>Taxa de entrega</strong>
+            <strong>R$ 8,00</strong>
+        </div>`;
+    }
+
+    document.getElementById("totalValue").innerText="Total: R$ "+total.toFixed(2).replace('.',',');
     document.getElementById("cartFooter").style.display=cart.length?"block":"none";
 }
 
-function finish(){
-    alert("Pedido enviado com sucesso! 🎉");
+function finishOrder(){
+    if(cart.length===0){
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+
+    let nome=prompt("Digite seu nome:");
+    if(!nome) return;
+    let pagamento=prompt("Forma de pagamento:");
+
+    let msg=`Pedido - Rabikas Burguer\nCliente: ${nome}\n`;
+    msg+=isDelivery?`Entrega\nEndereço: ${deliveryAddress}\n`:"Retirada no local\n";
+    msg+=`Pagamento: ${pagamento}\n\nItens:\n`;
+
+    let total=0;
+    cart.forEach(i=>{
+        msg+=`- ${i.name} (R$ ${i.price.toFixed(2).replace('.',',')})\n`;
+        total+=i.price;
+    });
+
+    if(isDelivery){
+        msg+=`- Taxa de entrega (R$ 8,00)\n`;
+        total+=8;
+    }
+
+    msg+=`\nTotal: R$ ${total.toFixed(2).replace('.',',')}`;
+
+    window.open("https://wa.me/554991789706?text="+encodeURIComponent(msg),"_blank");
 }
 </script>
 
