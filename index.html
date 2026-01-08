@@ -16,41 +16,6 @@ body{
     color:#fff;
 }
 
-/* SPLASH */
-.splash{
-    position:fixed; inset:0;
-    background:radial-gradient(circle at top,#5a0070,#1b001f);
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    text-align:center; z-index:100; padding:20px;
-}
-
-.brand-3d{
-    font-family:'Montserrat',sans-serif;
-    font-size:38px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:#ffd34d;
-    text-transform:uppercase;
-    text-shadow:
-        1px 1px 0 #c98c00,
-        2px 2px 0 #b37a00,
-        3px 3px 0 #9c6800,
-        4px 4px 12px rgba(0,0,0,.6);
-    margin-bottom:12px;
-}
-
-.splash button{
-    background:linear-gradient(135deg,#ffcc00,#ff9900);
-    color:#3b0047;
-    padding:16px 38px;
-    border:none;
-    border-radius:50px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 8px 0 #c97c00;
-}
-
 /* BANNER FECHANDO */
 .closing-banner{
     position:fixed;
@@ -72,7 +37,6 @@ body{
     min-height:100vh;
     padding:20px 12px 200px;
     text-align:center;
-    display:none;
 }
 
 /* HEADER */
@@ -234,13 +198,6 @@ body{
 
 <div class="closing-banner" id="closingBanner">⚠️ Atenção: fechamos em 10 minutos!</div>
 
-<!-- SPLASH -->
-<div class="splash" id="splash">
-    <div class="brand-3d">Rabikas Burguer</div>
-    <button onclick="enterApp()">FAZER PEDIDO</button>
-</div>
-
-<!-- APP -->
 <div class="container" id="app">
 
     <div class="brand-app">Rabikas Burguer</div>
@@ -352,8 +309,8 @@ let deliveryFee = 8.00;
 let isDelivery = false;
 let deliveryAddress = "";
 
-/* HORÁRIO */
-function checkBusinessHours(){
+/* VERIFICA SE ESTÁ ABERTO AGORA */
+function isOpenNow(){
     const now = new Date();
     const day = now.getDay(); // 0=Dom,1=Seg,2=Ter,3=Qua,4=Qui,5=Sex,6=Sáb
     const hour = now.getHours();
@@ -361,18 +318,12 @@ function checkBusinessHours(){
     const currentTime = hour + minute / 60;
 
     // Segunda fechado
-    if(day === 1){
-        alert("❌ Estamos fechados hoje (segunda-feira).\nAtendemos de terça a domingo das 18:30 às 22:30.");
-        return false;
-    }
+    if(day === 1) return false;
 
-    const openTime = 18.5;
-    const closeTime = 22.5;
+    const openTime = 18.5; // 18:30
+    const closeTime = 22.5; // 22:30
 
-    if(currentTime < openTime || currentTime > closeTime){
-        alert("⏰ Estamos fechados no momento.\nHorário: Terça a Domingo, 18:30 às 22:30.");
-        return false;
-    }
+    if(currentTime < openTime || currentTime > closeTime) return false;
 
     return true;
 }
@@ -391,21 +342,20 @@ function checkClosingBanner(){
         document.getElementById('closingBanner').style.display = 'none';
     }
 }
-
 setInterval(checkClosingBanner, 30000);
 
-function enterApp(){
-    if(!checkBusinessHours()) return;
-    document.getElementById('splash').style.display='none';
-    document.getElementById('app').style.display='block';
-}
-
+/* UI */
 function toggleBox(id){
     let el = document.getElementById(id);
     el.style.display = el.style.display === 'block' ? 'none' : 'block';
 }
 
+/* CARRINHO */
 function addToCart(name, price){
+    if(!isOpenNow()){
+        alert("⏰ Estamos fechados no momento.\nAtendemos de terça a domingo das 18:30 às 22:30.");
+        return;
+    }
     cart.push({name, price});
     updateCart();
 }
@@ -427,7 +377,6 @@ function setDelivery(value){
     } else {
         deliveryAddress = "";
     }
-
     updateCart();
 }
 
