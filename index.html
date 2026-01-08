@@ -51,6 +51,19 @@ body{
     box-shadow:0 8px 0 #c97c00;
 }
 
+/* BANNER FECHANDO */
+.closing-banner{
+    position:fixed;
+    top:0; left:0; right:0;
+    background:#ff3b3b;
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-weight:bold;
+    z-index:200;
+    display:none;
+}
+
 /* APP */
 .container{
     width:100%;
@@ -219,6 +232,8 @@ body{
 
 <body>
 
+<div class="closing-banner" id="closingBanner">⚠️ Atenção: fechamos em 10 minutos!</div>
+
 <!-- SPLASH -->
 <div class="splash" id="splash">
     <div class="brand-3d">Rabikas Burguer</div>
@@ -337,7 +352,50 @@ let deliveryFee = 8.00;
 let isDelivery = false;
 let deliveryAddress = "";
 
+/* HORÁRIO */
+function checkBusinessHours(){
+    const now = new Date();
+    const day = now.getDay(); // 0=Dom,1=Seg,2=Ter,3=Qua,4=Qui,5=Sex,6=Sáb
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const currentTime = hour + minute / 60;
+
+    // Segunda fechado
+    if(day === 1){
+        alert("❌ Estamos fechados hoje (segunda-feira).\nAtendemos de terça a domingo das 18:30 às 22:30.");
+        return false;
+    }
+
+    const openTime = 18.5;
+    const closeTime = 22.5;
+
+    if(currentTime < openTime || currentTime > closeTime){
+        alert("⏰ Estamos fechados no momento.\nHorário: Terça a Domingo, 18:30 às 22:30.");
+        return false;
+    }
+
+    return true;
+}
+
+/* BANNER FECHANDO */
+function checkClosingBanner(){
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const currentTime = hour + minute / 60;
+
+    if(day !== 1 && currentTime >= 22.33 && currentTime <= 22.5){
+        document.getElementById('closingBanner').style.display = 'block';
+    } else {
+        document.getElementById('closingBanner').style.display = 'none';
+    }
+}
+
+setInterval(checkClosingBanner, 30000);
+
 function enterApp(){
+    if(!checkBusinessHours()) return;
     document.getElementById('splash').style.display='none';
     document.getElementById('app').style.display='block';
 }
@@ -364,7 +422,7 @@ function setDelivery(value){
         deliveryAddress = prompt("Digite o endereço para entrega:");
         if(!deliveryAddress){
             isDelivery = false;
-            document.querySelector('input[value="retirada"]').checked = true;
+            document.querySelector('input[value=\"retirada\"]').checked = true;
         }
     } else {
         deliveryAddress = "";
