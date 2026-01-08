@@ -2,108 +2,190 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Rabikas Burguer • Cardápio Digital</title>
+<title>Rabika's Burguer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0}
 
-/* 🔵 FUNDO NOVO COM GRADIENTE (alteração pedida) */
 body{
-    background: linear-gradient(
-        180deg,
-        #06003a 0%,
-        #0a045a 50%,
-        #03001f 100%
-    );
+    background:linear-gradient(180deg,#06003a 0%,#0a045a 50%,#03001f 100%);
     font-family:Arial,Helvetica,sans-serif;
     color:#fff;
     display:flex;
     justify-content:center;
     overflow-y:auto;
-    overflow-x:hidden;
 }
 
 /* SPLASH */
 #splashScreen{
-    position:fixed;inset:0;
-    background:linear-gradient(
-        180deg,
-        #06003a 0%,
-        #0a045a 50%,
-        #03001f 100%
-    );
-    display:flex;align-items:center;justify-content:center;
+    position:fixed;
+    inset:0;
+    background:linear-gradient(180deg,#06003a,#03001f);
+    display:flex;
+    justify-content:center;
+    align-items:center;
     z-index:9999;
 }
-.splash-content{max-width:420px;width:100%;text-align:center;padding:20px;}
-.splash-title{
-    font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;
-    color:#ffd34d;text-shadow:2px 2px 0 #c98c00,4px 4px 0 #b37a00;
-    animation:zoomIn 1.2s ease;
+
+.splash-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:30px;
+    animation:zoomLogo 1.2s ease;
 }
+
+.splash-title{
+    font-size:42px;
+    font-weight:900;
+    color:#FFD34D;
+    text-align:center;
+}
+
 .splash-btn{
-    margin-top:30px;background:linear-gradient(135deg,#ffcc00,#ff9900);
-    color:#3b0047;padding:16px 40px;border-radius:30px;
-    font-weight:bold;font-size:18px;cursor:pointer;
-    animation:pulse 1.8s infinite;
+    background:linear-gradient(135deg,#FFD34D,#FFB000);
+    border:none;
+    padding:16px 42px;
+    border-radius:40px;
+    font-size:18px;
+    font-weight:bold;
+    color:#2b0033;
+    cursor:pointer;
+    animation:pulse 1.6s infinite;
+}
+
+@keyframes zoomLogo{
+    from{transform:scale(.7);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.06)}
+    100%{transform:scale(1)}
 }
 
 /* APP */
-#appContainer{
-    width:100%;max-width:420px;padding:20px 12px 240px;
-    display:flex;flex-direction:column;align-items:center;
-    opacity:0;transform:scale(.96);transition:.6s;
+#app{
+    width:100%;
+    max-width:420px;
+    padding:20px 12px 240px;
+    display:none;
+    flex-direction:column;
+    align-items:center;
 }
-#appContainer.show{opacity:1;transform:scale(1);}
-.brand-app{
-    font-family:'Montserrat',sans-serif;font-size:34px;font-weight:900;
-    color:#ffd34d;text-shadow:1px 1px 0 #c98c00,2px 2px 0 #b37a00;
+
+.brand-title{
+    font-size:28px;
+    font-weight:bold;
+    color:#FFD34D;
+    margin-bottom:10px;
 }
-.brand-sub{opacity:.85;margin-bottom:20px;}
 
 .category-btn{
-    width:100%;background:linear-gradient(135deg,#ffcc00,#ff9900);
-    color:#3b0047;padding:16px;border-radius:20px;font-weight:bold;
-    margin-bottom:14px;cursor:pointer;
-    display:flex;justify-content:space-between;align-items:center;
+    width:100%;
+    background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#2b0033;
+    padding:16px;
+    border-radius:20px;
+    font-weight:bold;
+    margin-bottom:14px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
+
 .sub-btn{
-    width:100%;background:#ffd34d;color:#3b0047;
-    padding:14px;border-radius:16px;font-weight:bold;
-    margin:10px 0;cursor:pointer;text-align:center;
+    width:100%;
+    background:#FFD34D;
+    color:#2b0033;
+    padding:12px;
+    border-radius:16px;
+    font-weight:bold;
+    margin:10px 0;
+    cursor:pointer;
+    text-align:center;
 }
+
 .content-box{
-    width:100%;background:#fff;color:#3b0047;border-radius:20px;
-    padding:15px;margin-bottom:20px;display:none;
+    width:100%;
+    background:#fff;
+    color:#2b0033;
+    border-radius:20px;
+    padding:15px;
+    margin-bottom:20px;
+    display:none;
 }
+
 .item{
-    display:grid;grid-template-columns:1fr auto auto;
-    gap:10px;padding:10px 0;border-bottom:1px dashed #ddd;
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px dashed #ddd;
 }
-.item:last-child{border:none;}
+
+.item:last-child{border:none}
+
 .btn-add{
-    background:#5a0070;color:#fff;border:none;border-radius:10px;
-    padding:6px 12px;cursor:pointer;
+    background:#5a0070;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:6px 12px;
+    cursor:pointer;
 }
 
-/* carrinho */
+/* CARRINHO */
 .cart-footer{
-    position:fixed;bottom:0;left:50%;transform:translateX(-50%);
-    width:100%;max-width:420px;background:#fff;color:#3b0047;
-    padding:15px;border-radius:20px 20px 0 0;display:none;
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    color:#2b0033;
+    padding:15px;
+    border-radius:20px 20px 0 0;
+    display:none;
 }
-.cart-item{display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:6px 0;}
-.remove-btn{background:#e60000;color:#fff;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;}
-.delivery-box{display:flex;justify-content:space-around;margin:10px 0;}
-.total{text-align:right;font-weight:bold;}
-.btn-finish{background:#25D366;color:#fff;padding:14px;border-radius:14px;font-weight:bold;margin-top:10px;cursor:pointer;}
 
-@keyframes zoomIn{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
-@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
-.fade-out{animation:fadeOut .6s forwards;}
-@keyframes fadeOut{to{opacity:0;transform:scale(.9);}}
+.cart-item{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:10px;
+    padding:6px 0;
+}
+
+.remove-btn{
+    background:#e60000;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    padding:2px 6px;
+    cursor:pointer;
+}
+
+.delivery-box{
+    display:flex;
+    justify-content:space-around;
+    margin:10px 0;
+}
+
+.total{text-align:right;font-weight:bold}
+
+.btn-finish{
+    background:#25D366;
+    color:#fff;
+    padding:14px;
+    border-radius:14px;
+    font-weight:bold;
+    margin-top:10px;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -112,19 +194,19 @@ body{
 <!-- SPLASH -->
 <div id="splashScreen">
   <div class="splash-content">
-    <div class="splash-title">Rabikas Burguer</div>
-    <div class="splash-btn" onclick="enterApp()">FAZER PEDIDO</div>
+    <div class="splash-title">Rabika's Burguer</div>
+    <button class="splash-btn" onclick="enterApp()">FAZER PEDIDO</button>
   </div>
 </div>
 
 <!-- APP -->
-<div id="appContainer">
-<div class="brand-app">Rabikas Burguer</div>
-<div class="brand-sub">Cardápio Digital</div>
+<div id="app">
+
+<div class="brand-title">Rabika's Burguer</div>
 
 <!-- LANCHES -->
-<div class="category-btn" onclick="toggle('lanchesBox')">🍔 Lanches <span>▼</span></div>
-<div id="lanchesBox" class="content-box">
+<div class="category-btn" onclick="toggle('lanches')">🍔 Lanches <span>▼</span></div>
+<div id="lanches" class="content-box">
 <div class="item"><span>X-Salada</span><span>R$ 17,00</span><button class="btn-add" onclick="addToCart('X-Salada',17)">+</button></div>
 <div class="item"><span>X-Burguer</span><span>R$ 14,00</span><button class="btn-add" onclick="addToCart('X-Burguer',14)">+</button></div>
 <div class="item"><span>X-Frango</span><span>R$ 22,00</span><button class="btn-add" onclick="addToCart('X-Frango',22)">+</button></div>
@@ -154,8 +236,8 @@ body{
 </div>
 
 <!-- PASTÉIS -->
-<div class="category-btn" onclick="toggle('pasteisBox')">🥟 Pastéis <span>▼</span></div>
-<div id="pasteisBox" class="content-box">
+<div class="category-btn" onclick="toggle('pasteis')">🥟 Pastéis <span>▼</span></div>
+<div id="pasteis" class="content-box">
 <div class="item"><span>Pastel de Carne</span><span>R$ 14,00</span><button class="btn-add" onclick="addToCart('Pastel de Carne',14)">+</button></div>
 <div class="item"><span>Pastel de Frango</span><span>R$ 12,00</span><button class="btn-add" onclick="addToCart('Pastel de Frango',12)">+</button></div>
 <div class="item"><span>Frango Bacon Cheddar</span><span>R$ 16,00</span><button class="btn-add" onclick="addToCart('Pastel Frango Bacon Cheddar',16)">+</button></div>
@@ -172,8 +254,8 @@ body{
 </div>
 
 <!-- PORÇÕES -->
-<div class="category-btn" onclick="toggle('porcoesBox')">🍟 Porções <span>▼</span></div>
-<div id="porcoesBox" class="content-box">
+<div class="category-btn" onclick="toggle('porcoes')">🍟 Porções <span>▼</span></div>
+<div id="porcoes" class="content-box">
 <div class="item"><span>Fritas c/ Frango</span><span>R$ 39,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Frango',39.99)">+</button></div>
 <div class="item"><span>Fritas</span><span>R$ 24,99</span><button class="btn-add" onclick="addToCart('Fritas',24.99)">+</button></div>
 <div class="item"><span>Fritas c/ Calabresa</span><span>R$ 34,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Calabresa',34.99)">+</button></div>
@@ -189,8 +271,8 @@ body{
 </div>
 
 <!-- BEBIDAS -->
-<div class="category-btn" onclick="toggle('bebidasBox')">🥤 Bebidas <span>▼</span></div>
-<div id="bebidasBox" class="content-box">
+<div class="category-btn" onclick="toggle('bebidas')">🥤 Bebidas <span>▼</span></div>
+<div id="bebidas" class="content-box">
 <div class="item"><span>Cassulinha 200 ml</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Cassulinha 200 ml',3)">+</button></div>
 <div class="item"><span>Coca-Cola 600 ml</span><span>R$ 8,00</span><button class="btn-add" onclick="addToCart('Coca-Cola 600 ml',8)">+</button></div>
 <div class="item"><span>Coca-Cola 2 Litros</span><span>R$ 16,00</span><button class="btn-add" onclick="addToCart('Coca-Cola 2 Litros',16)">+</button></div>
@@ -201,8 +283,8 @@ body{
 </div>
 
 <!-- AÇAÍ -->
-<div class="category-btn" onclick="toggle('acaiBox')">🍧 Açaí <span>▼</span></div>
-<div id="acaiBox" class="content-box">
+<div class="category-btn" onclick="toggle('acai')">🍧 Açaí <span>▼</span></div>
+<div id="acai" class="content-box">
 
 <div class="sub-btn" onclick="toggle('acaiTamanhos')">Tamanhos</div>
 <div id="acaiTamanhos" class="content-box">
@@ -240,75 +322,72 @@ body{
 </div>
 
 <script>
-let cart=[];
-let isDelivery=false;
+let cart=[]
+let isDelivery=false
 
 function enterApp(){
-    document.getElementById("splashScreen").classList.add("fade-out");
-    setTimeout(()=>{
-        document.getElementById("splashScreen").style.display="none";
-        document.getElementById("appContainer").classList.add("show");
-    },600);
+    document.getElementById("splashScreen").style.display="none"
+    document.getElementById("app").style.display="flex"
 }
 
 function toggle(id){
-const el=document.getElementById(id);
-el.style.display = el.style.display==="block"?"none":"block";
+    const el=document.getElementById(id)
+    el.style.display = el.style.display==="block"?"none":"block"
 }
 
 function isOpenNow(){
-const d=new Date();
-const day=d.getDay();
-const time=d.getHours()+d.getMinutes()/60;
-if(day===1) return false;
-if(time<18.5||time>22.5) return false;
-return true;
+    const d=new Date()
+    const day=d.getDay()
+    const time=d.getHours()+d.getMinutes()/60
+    if(day===1) return false
+    if(time<18.5||time>22.5) return false
+    return true
 }
 
 function addToCart(name,price){
-if(!isOpenNow()){
-alert("⏰ Estamos fechados.\nAtendemos de terça a domingo das 18:30 às 22:30.");
-return;
-}
-cart.push({name,price});
-updateCart();
+    if(!isOpenNow()){
+        alert("⏰ Estamos fechados.\nAtendemos de terça a domingo das 18:30 às 22:30.")
+        return
+    }
+    cart.push({name,price})
+    updateCart()
 }
 
 function setDelivery(v){
-isDelivery=v;
-updateCart();
+    isDelivery=v
+    updateCart()
 }
 
 function updateCart(){
-const box=document.getElementById("cartItems");
-box.innerHTML="";
-let total=0;
-cart.forEach((i,idx)=>{
-total+=i.price;
-box.innerHTML+=`
-<div class="cart-item">
-<span>${i.name}</span>
-<span>R$ ${i.price.toFixed(2).replace('.',',')}</span>
-<button class="remove-btn" onclick="removeItem(${idx})">x</button>
-</div>`;
-});
-if(isDelivery) total+=8;
-document.getElementById("totalValue").innerText="Total: R$ "+total.toFixed(2).replace('.',',');
-document.getElementById("cartFooter").style.display=cart.length?"block":"none";
+    const box=document.getElementById("cartItems")
+    box.innerHTML=""
+    let total=0
+    cart.forEach((i,idx)=>{
+        total+=i.price
+        box.innerHTML+=`
+        <div class="cart-item">
+            <span>${i.name}</span>
+            <span>R$ ${i.price.toFixed(2).replace('.',',')}</span>
+            <button class="remove-btn" onclick="removeItem(${idx})">x</button>
+        </div>`
+    })
+    if(isDelivery) total+=8
+    document.getElementById("totalValue").innerText="Total: R$ "+total.toFixed(2).replace('.',',')
+    document.getElementById("cartFooter").style.display=cart.length?"block":"none"
 }
 
 function removeItem(i){
-cart.splice(i,1);
-updateCart();
+    cart.splice(i,1)
+    updateCart()
 }
 
 function finishOrder(){
-let msg="Pedido Rabikas Burguer\n";
-let total=0;
-cart.forEach(i=>{msg+=`- ${i.name} R$ ${i.price}\n`;total+=i.price});
-if(isDelivery){msg+="Taxa entrega R$ 8\n";total+=8;}
-msg+=`Total R$ ${total}`;
-window.open("https://wa.me/554991789706?text="+encodeURIComponent(msg));
+    let msg="Pedido Rabika's Burguer\n"
+    let total=0
+    cart.forEach(i=>{msg+=`- ${i.name} R$ ${i.price}\n`;total+=i.price})
+    if(isDelivery){msg+="Taxa entrega R$ 8\n";total+=8}
+    msg+=`Total R$ ${total}`
+    window.open("https://wa.me/554991789706?text="+encodeURIComponent(msg))
 }
 </script>
 
