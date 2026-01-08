@@ -70,7 +70,7 @@ body{
 #app{
     width:100%;
     max-width:420px;
-    padding:20px 12px 240px;
+    padding:20px 12px 360px;
     display:none;
     flex-direction:column;
     align-items:center;
@@ -175,7 +175,7 @@ body{
     margin:10px 0;
 }
 
-.total{text-align:right;font-weight:bold}
+.total{text-align:right;font-weight:bold;margin-top:6px}
 
 .btn-finish{
     background:#25D366;
@@ -185,6 +185,15 @@ body{
     font-weight:bold;
     margin-top:10px;
     cursor:pointer;
+    text-align:center;
+}
+
+.input-field, .select-field{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    margin-top:8px;
 }
 </style>
 </head>
@@ -312,11 +321,28 @@ body{
 
 <!-- CARRINHO -->
 <div class="cart-footer" id="cartFooter">
+
 <div id="cartItems"></div>
+
 <div class="delivery-box">
 <label><input type="radio" name="entrega" checked onchange="setDelivery(false)"> Retirada</label>
 <label><input type="radio" name="entrega" onchange="setDelivery(true)"> Entrega (+ R$ 8)</label>
 </div>
+
+<input class="input-field" id="clientName" placeholder="Seu nome">
+
+<div id="addressBox" style="display:none;">
+    <input class="input-field" id="clientAddress" placeholder="Endereço para entrega">
+</div>
+
+<select class="select-field" id="paymentMethod">
+    <option value="">Forma de pagamento</option>
+    <option value="Dinheiro">Dinheiro</option>
+    <option value="Pix">Pix</option>
+    <option value="Cartão de Crédito">Cartão de Crédito</option>
+    <option value="Cartão de Débito">Cartão de Débito</option>
+</select>
+
 <div class="total" id="totalValue">Total: R$ 0,00</div>
 <div class="btn-finish" onclick="finishOrder()">Finalizar Pedido</div>
 </div>
@@ -355,6 +381,7 @@ function addToCart(name,price){
 
 function setDelivery(v){
     isDelivery=v
+    document.getElementById("addressBox").style.display = v ? "block" : "none"
     updateCart()
 }
 
@@ -382,11 +409,38 @@ function removeItem(i){
 }
 
 function finishOrder(){
-    let msg="Pedido Rabika's Burguer\n"
+    const name = document.getElementById("clientName").value
+    const address = document.getElementById("clientAddress").value
+    const payment = document.getElementById("paymentMethod").value
+
+    if(!name){
+        alert("Informe seu nome.")
+        return
+    }
+
+    if(isDelivery && !address){
+        alert("Informe o endereço para entrega.")
+        return
+    }
+
+    if(!payment){
+        alert("Informe a forma de pagamento.")
+        return
+    }
+
+    let msg="🍔 Pedido Rabika's Burguer\n\n"
+    msg+=`Cliente: ${name}\n`
+    msg+=`Pagamento: ${payment}\n`
+    msg+= isDelivery ? `Entrega\nEndereço: ${address}\n` : "Retirada no local\n"
+    msg+="\nItens:\n"
+
     let total=0
     cart.forEach(i=>{msg+=`- ${i.name} R$ ${i.price}\n`;total+=i.price})
+
     if(isDelivery){msg+="Taxa entrega R$ 8\n";total+=8}
-    msg+=`Total R$ ${total}`
+
+    msg+=`\nTotal R$ ${total}`
+
     window.open("https://wa.me/554991789706?text="+encodeURIComponent(msg))
 }
 </script>
