@@ -108,7 +108,7 @@ body{
 /* APP */
 .container{
     width:100%; max-width:430px; margin:0 auto;
-    min-height:100vh; padding:20px 12px 200px;
+    min-height:100vh; padding:20px 12px 220px;
     text-align:center; display:none;
 }
 
@@ -204,25 +204,96 @@ body{
 
 <!-- APP -->
 <div class="container" id="app">
+
     <div class="brand-app">Rabikas Burguer</div>
     <div class="brand-sub">Cardápio Digital</div>
 
+    <!-- AÇAÍ -->
     <div class="category-btn" onclick="toggleBox('acaiArea')">🍧 Açaí <span>▼</span></div>
     <div id="acaiArea" style="display:none;">
+
         <div class="sub-btn" onclick="toggleBox('acaiTamanhos')">Tamanhos</div>
         <div class="content-box" id="acaiTamanhos">
             <div class="item"><span class="item-name">300ml</span><span class="item-price">R$12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
             <div class="item"><span class="item-name">400ml</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">Adicionar</button></div>
             <div class="item"><span class="item-name">500ml</span><span class="item-price">R$18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">Adicionar</button></div>
         </div>
+
+        <div class="sub-btn" onclick="toggleBox('acaiExtras')">Adicionais</div>
+        <div class="content-box" id="acaiExtras">
+            <div class="item"><span class="item-name">Paçoca</span><span class="item-price">R$2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Leite em pó</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Granola</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Morango</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">Adicionar</button></div>
+            <div class="item"><span class="item-name">M&M</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('M&M',3)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Ouro Branco</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('Ouro Branco',3)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Banana</span><span class="item-price">R$2,00</span><button class="btn-add" onclick="addToCart('Banana',2)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Sonho/Valsa</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('Sonho/Valsa',3)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Leite Condensado</span><span class="item-price">R$3,00</span><button class="btn-add" onclick="addToCart('Leite Condensado',3)">Adicionar</button></div>
+            <div class="item"><span class="item-name">Nutella</span><span class="item-price">R$4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">Adicionar</button></div>
+        </div>
     </div>
+
+    <!-- LANCHES -->
+    <div class="category-btn" onclick="toggleBox('lanchesBox')">🍔 Lanches <span>▼</span></div>
+    <div class="content-box" id="lanchesBox">
+        <div class="item"><span class="item-name">X-Salada</span><span class="item-price">R$17,00</span><button class="btn-add" onclick="addToCart('X-Salada',17)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Burguer</span><span class="item-price">R$14,00</span><button class="btn-add" onclick="addToCart('X-Burguer',14)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Frango</span><span class="item-price">R$22,00</span><button class="btn-add" onclick="addToCart('X-Frango',22)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Frango Cremoso</span><span class="item-price">R$20,00</span><button class="btn-add" onclick="addToCart('X-Frango Cremoso',20)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Bacon</span><span class="item-price">R$25,00</span><button class="btn-add" onclick="addToCart('X-Bacon',25)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Calabresa</span><span class="item-price">R$25,00</span><button class="btn-add" onclick="addToCart('X-Calabresa',25)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Coração</span><span class="item-price">R$27,00</span><button class="btn-add" onclick="addToCart('X-Coração',27)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Tudo</span><span class="item-price">R$32,00</span><button class="btn-add" onclick="addToCart('X-Tudo',32)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Burguer Duplo</span><span class="item-price">R$22,00</span><button class="btn-add" onclick="addToCart('X-Burguer Duplo',22)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Egg</span><span class="item-price">R$20,00</span><button class="btn-add" onclick="addToCart('X-Egg',20)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Tribom</span><span class="item-price">R$32,00</span><button class="btn-add" onclick="addToCart('X-Tribom',32)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Da Casa</span><span class="item-price">R$45,00</span><button class="btn-add" onclick="addToCart('X-Da Casa',45)">Adicionar</button></div>
+        <div class="item"><span class="item-name">X-Dog</span><span class="item-price">R$20,00</span><button class="btn-add" onclick="addToCart('X-Dog',20)">Adicionar</button></div>
+    </div>
+
+    <!-- PASTÉIS -->
+    <div class="category-btn" onclick="toggleBox('pasteisBox')">🥟 Pastéis <span>▼</span></div>
+    <div class="content-box" id="pasteisBox">
+        <div class="item"><span class="item-name">Pastel de Carne</span><span class="item-price">R$14,00</span><button class="btn-add" onclick="addToCart('Pastel de Carne',14)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Pastel de Frango</span><span class="item-price">R$12,00</span><button class="btn-add" onclick="addToCart('Pastel de Frango',12)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Frango Bacon Cheddar</span><span class="item-price">R$16,00</span><button class="btn-add" onclick="addToCart('Pastel Frango Bacon Cheddar',16)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Bacon Cheddar</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Bacon Cheddar',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Calabresa c/ Cebola</span><span class="item-price">R$14,00</span><button class="btn-add" onclick="addToCart('Pastel Calabresa c/ Cebola',14)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Carne e Queijo</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Carne e Queijo',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Queijo</span><span class="item-price">R$14,00</span><button class="btn-add" onclick="addToCart('Pastel Queijo',14)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Chocolate ao Leite Cremoso</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Chocolate ao Leite',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Banana Queijo Canela</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Banana Queijo Canela',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Romeu e Julieta</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Romeu e Julieta',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Chocolate Branco Cremoso</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Chocolate Branco',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Creme e Ouro Branco</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Creme e Ouro Branco',15)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Creme e Sonho de Valsa</span><span class="item-price">R$15,00</span><button class="btn-add" onclick="addToCart('Pastel Creme e Sonho de Valsa',15)">Adicionar</button></div>
+    </div>
+
+    <!-- PORÇÕES -->
+    <div class="category-btn" onclick="toggleBox('porcoesBox')">🍟 Porções <span>▼</span></div>
+    <div class="content-box" id="porcoesBox">
+        <div class="item"><span class="item-name">Fritas c/ Frango</span><span class="item-price">R$39,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Frango',39.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas</span><span class="item-price">R$24,99</span><button class="btn-add" onclick="addToCart('Fritas',24.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Calabresa</span><span class="item-price">R$34,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Calabresa',34.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Tilápia</span><span class="item-price">R$34,99</span><button class="btn-add" onclick="addToCart('Tilápia',34.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Bacon</span><span class="item-price">R$34,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Bacon',34.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Anéis de Cebola</span><span class="item-price">R$24,99</span><button class="btn-add" onclick="addToCart('Anéis de Cebola',24.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Bacon, Calabresa e Queijo</span><span class="item-price">R$39,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Bacon, Calabresa e Queijo',39.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Bacon Cheddar</span><span class="item-price">R$39,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Bacon Cheddar',39.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Polenta e Frango</span><span class="item-price">R$39,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Polenta e Frango',39.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Polenta</span><span class="item-price">R$24,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Polenta',24.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas c/ Calabresa e Catupiry</span><span class="item-price">R$35,99</span><button class="btn-add" onclick="addToCart('Fritas c/ Calabresa e Catupiry',35.99)">Adicionar</button></div>
+        <div class="item"><span class="item-name">Fritas + Polenta + Chuleta + Anel de Cebola</span><span class="item-price">R$49,99</span><button class="btn-add" onclick="addToCart('Fritas + Polenta + Chuleta + Anel de Cebola',49.99)">Adicionar</button></div>
+    </div>
+
 </div>
 
 <!-- CARRINHO -->
 <div class="cart-footer" id="cartFooter">
     <div id="cartItems"></div>
     <div class="delivery-box">
-        <label><input type="radio" name="entregaTipo" checked onchange="setDelivery(false)"> Retirada</label>
+        <label><input type="radio" name="entregaTipo" checked onchange="setDelivery(false)"> Retirada no local</label>
         <label><input type="radio" name="entregaTipo" onchange="setDelivery(true)"> Entrega (+ R$ 8,00)</label>
     </div>
     <div class="total" id="totalValue">Total: R$0,00</div>
@@ -363,7 +434,7 @@ function finishOrder(){
         return;
     }
 
-    launchConfetti(); // 🎉 CONFETE AQUI
+    launchConfetti();
 
     let nome=prompt("Digite seu nome:");
     if(!nome) return;
