@@ -23,7 +23,14 @@ body{
     background:radial-gradient(circle at top,#5a0070,#1b001f);
     display:flex; flex-direction:column; justify-content:center; align-items:center;
     text-align:center; z-index:999; padding:20px;
+    transition:opacity .6s ease, transform .6s ease;
 }
+.splash.hide{
+    opacity:0;
+    transform:translateY(-30px);
+    pointer-events:none;
+}
+
 .splash-title{
     font-family:'Anton',sans-serif;
     font-size:46px;
@@ -41,6 +48,7 @@ body{
     80%{transform:scale(1.1) rotate(2deg);}
     100%{transform:scale(1) rotate(0);}
 }
+
 .splash button{
     background:linear-gradient(135deg,#ffcc00,#ff9900);
     color:#3b0047;
@@ -59,57 +67,18 @@ body{
     100%{transform:scale(1);}
 }
 
-/* LOADER */
-.loader{
-    position:fixed; inset:0;
-    background:rgba(0,0,0,.85);
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:998;
-    font-size:22px;
-    font-weight:bold;
-}
-.loader-icon{
-    font-size:42px;
-    animation:spin 1.2s linear infinite;
-    margin-bottom:10px;
-}
-@keyframes spin{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
-}
-
-/* CONFETE */
-.confetti{
-    position:fixed;
-    top:-10px;
-    width:10px;
-    height:10px;
-    background:red;
-    animation:fall linear forwards;
-    z-index:9999;
-}
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-        opacity:0;
-    }
-}
-
-/* BANNER FECHANDO */
-.closing-banner{
-    position:fixed; top:0; left:0; right:0;
-    background:#ff3b3b; color:#fff; text-align:center;
-    padding:10px; font-weight:bold; z-index:200; display:none;
-}
-
 /* APP */
 .container{
     width:100%; max-width:430px; margin:0 auto;
     min-height:100vh; padding:20px 12px 220px;
-    text-align:center; display:none;
+    text-align:center;
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .6s ease, transform .6s ease;
+}
+.container.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* HEADER */
@@ -178,6 +147,19 @@ body{
 
 .delivery-box{margin:10px 0; padding:10px; border-radius:12px; background:#f2f2f2; font-size:14px;}
 .btn-finish{margin-top:10px; background:linear-gradient(135deg,#25D366,#1ebe57); color:#fff; padding:15px; border-radius:14px; font-weight:bold; cursor:pointer;}
+
+/* CONFETE */
+.confetti{
+    position:fixed;
+    top:-10px;
+    width:10px;
+    height:10px;
+    animation:fall linear forwards;
+    z-index:9999;
+}
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg); opacity:0;}
+}
 </style>
 </head>
 
@@ -188,19 +170,11 @@ body{
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
 </audio>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-    <div class="loader-icon">⟳</div>
-    <div>Carregando...</div>
-</div>
-
 <!-- SPLASH -->
 <div class="splash" id="splash">
     <div class="splash-title">Rabikas Burguer</div>
     <button onclick="goToApp()">FAÇA SEU PEDIDO</button>
 </div>
-
-<div class="closing-banner" id="closingBanner">⚠️ Atenção: fechamos em 10 minutos!</div>
 
 <!-- APP -->
 <div class="container" id="app">
@@ -313,43 +287,19 @@ function playSound(){
     sound.play();
 }
 
-/* LOADER */
-function showLoader(){ document.getElementById("loader").style.display="flex"; }
-function hideLoader(){ document.getElementById("loader").style.display="none"; }
-
-/* SPLASH -> APP */
+/* TRANSIÇÃO SPLASH -> APP */
 function goToApp(){
     playSound();
-    showLoader();
+    const splash = document.getElementById("splash");
+    const app = document.getElementById("app");
+
+    splash.classList.add("hide");
+
     setTimeout(()=>{
-        document.getElementById("splash").style.display="none";
-        document.getElementById("app").style.display="block";
-        hideLoader();
-    },1800);
+        splash.style.display="none";
+        app.classList.add("show");
+    },600); // tempo só da animação, sem travar
 }
-
-/* HORÁRIO */
-function isOpenNow(){
-    const now=new Date();
-    const day=now.getDay();
-    const time=now.getHours()+now.getMinutes()/60;
-    if(day===1) return false;
-    if(time<18.5||time>22.5) return false;
-    return true;
-}
-
-/* BANNER FECHANDO */
-function checkClosingBanner(){
-    const now=new Date();
-    const day=now.getDay();
-    const time=now.getHours()+now.getMinutes()/60;
-    if(day!==1&&time>=22.33&&time<=22.5){
-        document.getElementById("closingBanner").style.display="block";
-    }else{
-        document.getElementById("closingBanner").style.display="none";
-    }
-}
-setInterval(checkClosingBanner,30000);
 
 /* UI */
 function toggleBox(id){
@@ -361,10 +311,6 @@ function toggleBox(id){
 /* CARRINHO */
 function addToCart(name,price){
     playSound();
-    if(!isOpenNow()){
-        alert("⏰ Estamos fechados. Atendemos de terça a domingo das 18:30 às 22:30.");
-        return;
-    }
     cart.push({name,price});
     updateCart();
 }
