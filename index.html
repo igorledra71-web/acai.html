@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Rabikas Burguer • Cardápio Digital</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -16,169 +15,74 @@ body{
     display:flex;
     justify-content:center;
     overflow-y:auto;
-    overflow-x:hidden;
 }
-
-/* SPLASH */
 #splashScreen{
-    position:fixed;
-    inset:0;
+    position:fixed;inset:0;
     background:linear-gradient(180deg,#120016,#2b0033);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:flex;align-items:center;justify-content:center;
     z-index:9999;
 }
-.splash-content{
-    width:100%;
-    max-width:420px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-}
+.splash-content{max-width:420px;width:100%;text-align:center;padding:20px;}
 .splash-title{
-    font-family:'Montserrat',sans-serif;
-    font-size:48px;
-    font-weight:900;
-    color:#ffd34d;
-    text-shadow:2px 2px 0 #c98c00,4px 4px 0 #b37a00;
+    font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;
+    color:#ffd34d;text-shadow:2px 2px 0 #c98c00,4px 4px 0 #b37a00;
     animation:zoomIn 1.2s ease;
 }
 .splash-btn{
-    margin-top:30px;
-    background:linear-gradient(135deg,#ffcc00,#ff9900);
-    color:#3b0047;
-    padding:16px 40px;
-    border-radius:30px;
-    font-weight:bold;
-    font-size:18px;
-    cursor:pointer;
+    margin-top:30px;background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#3b0047;padding:16px 40px;border-radius:30px;
+    font-weight:bold;font-size:18px;cursor:pointer;
     animation:pulse 1.8s infinite;
 }
-
-/* APP */
 #appContainer{
-    width:100%;
-    max-width:420px;
-    padding:20px 12px 240px;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    opacity:0;
-    transform:scale(.96);
-    transition:all .6s ease;
+    width:100%;max-width:420px;padding:20px 12px 240px;
+    display:flex;flex-direction:column;align-items:center;
+    opacity:0;transform:scale(.96);transition:.6s;
 }
 #appContainer.show{opacity:1;transform:scale(1);}
-
 .brand-app{
-    font-family:'Montserrat',sans-serif;
-    font-size:34px;
-    font-weight:900;
-    color:#ffd34d;
-    text-align:center;
-    text-shadow:1px 1px 0 #c98c00,2px 2px 0 #b37a00;
+    font-family:'Montserrat',sans-serif;font-size:34px;font-weight:900;
+    color:#ffd34d;text-shadow:1px 1px 0 #c98c00,2px 2px 0 #b37a00;
 }
-.brand-sub{text-align:center;opacity:.85;margin-bottom:20px;}
+.brand-sub{opacity:.85;margin-bottom:20px;}
 
 .category-btn{
-    width:100%;
-    background:linear-gradient(135deg,#ffcc00,#ff9900);
-    color:#3b0047;
-    padding:16px;
-    border-radius:20px;
-    font-weight:bold;
-    margin-bottom:14px;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    width:100%;background:linear-gradient(135deg,#ffcc00,#ff9900);
+    color:#3b0047;padding:16px;border-radius:20px;font-weight:bold;
+    margin-bottom:14px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;
 }
 .sub-btn{
-    width:100%;
-    background:#ffd34d;
-    color:#3b0047;
-    padding:14px;
-    border-radius:16px;
-    font-weight:bold;
-    margin:10px 0;
-    cursor:pointer;
-    text-align:center;
+    width:100%;background:#ffd34d;color:#3b0047;
+    padding:14px;border-radius:16px;font-weight:bold;
+    margin:10px 0;cursor:pointer;text-align:center;
 }
 .content-box{
-    width:100%;
-    background:#fff;
-    color:#3b0047;
-    border-radius:20px;
-    padding:15px;
-    margin-bottom:20px;
-    display:none;
+    width:100%;background:#fff;color:#3b0047;border-radius:20px;
+    padding:15px;margin-bottom:20px;display:none;
 }
 .item{
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    gap:10px;
-    padding:10px 0;
-    border-bottom:1px dashed #ddd;
+    display:grid;grid-template-columns:1fr auto auto;
+    gap:10px;padding:10px 0;border-bottom:1px dashed #ddd;
 }
 .item:last-child{border:none;}
 .btn-add{
-    background:#5a0070;
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    padding:6px 12px;
-    cursor:pointer;
+    background:#5a0070;color:#fff;border:none;border-radius:10px;
+    padding:6px 12px;cursor:pointer;
 }
 
-/* CARRINHO */
+/* carrinho */
 .cart-footer{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    max-width:420px;
-    background:#fff;
-    color:#3b0047;
-    padding:15px;
-    border-radius:20px 20px 0 0;
-    display:none;
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+    width:100%;max-width:420px;background:#fff;color:#3b0047;
+    padding:15px;border-radius:20px 20px 0 0;display:none;
 }
-.cart-item{
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    gap:10px;
-    padding:6px 0;
-}
-.remove-btn{
-    background:#e60000;
-    color:#fff;
-    border:none;
-    border-radius:6px;
-    padding:2px 6px;
-    cursor:pointer;
-}
-.delivery-box{
-    display:flex;
-    justify-content:space-around;
-    margin:10px 0;
-}
+.cart-item{display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:6px 0;}
+.remove-btn{background:#e60000;color:#fff;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;}
+.delivery-box{display:flex;justify-content:space-around;margin:10px 0;}
 .total{text-align:right;font-weight:bold;}
-.btn-finish{
-    background:#25D366;
-    color:#fff;
-    padding:14px;
-    border-radius:14px;
-    font-weight:bold;
-    margin-top:10px;
-    cursor:pointer;
-}
+.btn-finish{background:#25D366;color:#fff;padding:14px;border-radius:14px;font-weight:bold;margin-top:10px;cursor:pointer;}
 
-/* ANIMAÇÕES */
 @keyframes zoomIn{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
 @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
 .fade-out{animation:fadeOut .6s forwards;}
@@ -198,40 +102,12 @@ body{
 
 <!-- APP -->
 <div id="appContainer">
-
 <div class="brand-app">Rabikas Burguer</div>
 <div class="brand-sub">Cardápio Digital</div>
-
-<!-- AÇAÍ -->
-<div class="category-btn" onclick="toggle('acaiBox')">🍧 Açaí <span>▼</span></div>
-<div id="acaiBox" class="content-box">
-
-<div class="sub-btn" onclick="toggle('acaiTamanhos')">Tamanhos</div>
-<div id="acaiTamanhos" class="content-box">
-<div class="item"><span>300ml</span><span>R$ 12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">+</button></div>
-<div class="item"><span>400ml</span><span>R$ 15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">+</button></div>
-<div class="item"><span>500ml</span><span>R$ 18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">+</button></div>
-</div>
-
-<div class="sub-btn" onclick="toggle('acaiExtras')">Adicionais</div>
-<div id="acaiExtras" class="content-box">
-<div class="item"><span>Paçoca</span><span>R$ 2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">+</button></div>
-<div class="item"><span>Leite em pó</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">+</button></div>
-<div class="item"><span>Granola</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">+</button></div>
-<div class="item"><span>Morango</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">+</button></div>
-<div class="item"><span>M&M</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('M&M',3)">+</button></div>
-<div class="item"><span>Ouro Branco</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Ouro Branco',3)">+</button></div>
-<div class="item"><span>Banana</span><span>R$ 2,00</span><button class="btn-add" onclick="addToCart('Banana',2)">+</button></div>
-<div class="item"><span>Sonho/Valsa</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Sonho/Valsa',3)">+</button></div>
-<div class="item"><span>Leite Condensado</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Leite Condensado',3)">+</button></div>
-<div class="item"><span>Nutella</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">+</button></div>
-</div>
-</div>
 
 <!-- LANCHES -->
 <div class="category-btn" onclick="toggle('lanchesBox')">🍔 Lanches <span>▼</span></div>
 <div id="lanchesBox" class="content-box">
-
 <div class="item"><span>X-Salada</span><span>R$ 17,00</span><button class="btn-add" onclick="addToCart('X-Salada',17)">+</button></div>
 <div class="item"><span>X-Burguer</span><span>R$ 14,00</span><button class="btn-add" onclick="addToCart('X-Burguer',14)">+</button></div>
 <div class="item"><span>X-Frango</span><span>R$ 22,00</span><button class="btn-add" onclick="addToCart('X-Frango',22)">+</button></div>
@@ -307,6 +183,32 @@ body{
 <div class="item"><span>Achocolatado 200 ml</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Achocolatado 200 ml',3)">+</button></div>
 </div>
 
+<!-- AÇAÍ -->
+<div class="category-btn" onclick="toggle('acaiBox')">🍧 Açaí <span>▼</span></div>
+<div id="acaiBox" class="content-box">
+
+<div class="sub-btn" onclick="toggle('acaiTamanhos')">Tamanhos</div>
+<div id="acaiTamanhos" class="content-box">
+<div class="item"><span>300ml</span><span>R$ 12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">+</button></div>
+<div class="item"><span>400ml</span><span>R$ 15,00</span><button class="btn-add" onclick="addToCart('Açaí 400ml',15)">+</button></div>
+<div class="item"><span>500ml</span><span>R$ 18,00</span><button class="btn-add" onclick="addToCart('Açaí 500ml',18)">+</button></div>
+</div>
+
+<div class="sub-btn" onclick="toggle('acaiExtras')">Adicionais</div>
+<div id="acaiExtras" class="content-box">
+<div class="item"><span>Paçoca</span><span>R$ 2,00</span><button class="btn-add" onclick="addToCart('Paçoca',2)">+</button></div>
+<div class="item"><span>Leite em pó</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Leite em pó',4)">+</button></div>
+<div class="item"><span>Granola</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Granola',4)">+</button></div>
+<div class="item"><span>Morango</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Morango',4)">+</button></div>
+<div class="item"><span>M&M</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('M&M',3)">+</button></div>
+<div class="item"><span>Ouro Branco</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Ouro Branco',3)">+</button></div>
+<div class="item"><span>Banana</span><span>R$ 2,00</span><button class="btn-add" onclick="addToCart('Banana',2)">+</button></div>
+<div class="item"><span>Sonho/Valsa</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Sonho/Valsa',3)">+</button></div>
+<div class="item"><span>Leite Condensado</span><span>R$ 3,00</span><button class="btn-add" onclick="addToCart('Leite Condensado',3)">+</button></div>
+<div class="item"><span>Nutella</span><span>R$ 4,00</span><button class="btn-add" onclick="addToCart('Nutella',4)">+</button></div>
+</div>
+</div>
+
 </div>
 
 <!-- CARRINHO -->
@@ -325,12 +227,10 @@ let cart=[];
 let isDelivery=false;
 
 function enterApp(){
-    const splash=document.getElementById("splashScreen");
-    const app=document.getElementById("appContainer");
-    splash.classList.add("fade-out");
+    document.getElementById("splashScreen").classList.add("fade-out");
     setTimeout(()=>{
-        splash.style.display="none";
-        app.classList.add("show");
+        document.getElementById("splashScreen").style.display="none";
+        document.getElementById("appContainer").classList.add("show");
     },600);
 }
 
