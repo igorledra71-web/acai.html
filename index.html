@@ -165,18 +165,15 @@ body{
 
 <body>
 
-<!-- AUDIO -->
 <audio id="clickSound">
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
 </audio>
 
-<!-- SPLASH -->
 <div class="splash" id="splash">
     <div class="splash-title">Rabikas Burguer</div>
     <button onclick="goToApp()">FAÇA SEU PEDIDO</button>
 </div>
 
-<!-- APP -->
 <div class="container" id="app">
 
     <div class="brand-app">Rabikas Burguer</div>
@@ -185,7 +182,6 @@ body{
     <!-- AÇAÍ -->
     <div class="category-btn" onclick="toggleBox('acaiArea')">🍧 Açaí <span>▼</span></div>
     <div id="acaiArea" style="display:none;">
-
         <div class="sub-btn" onclick="toggleBox('acaiTamanhos')">Tamanhos</div>
         <div class="content-box" id="acaiTamanhos">
             <div class="item"><span class="item-name">300ml</span><span class="item-price">R$12,00</span><button class="btn-add" onclick="addToCart('Açaí 300ml',12)">Adicionar</button></div>
@@ -292,13 +288,21 @@ function goToApp(){
     playSound();
     const splash = document.getElementById("splash");
     const app = document.getElementById("app");
-
     splash.classList.add("hide");
-
     setTimeout(()=>{
         splash.style.display="none";
         app.classList.add("show");
-    },600); // tempo só da animação, sem travar
+    },600);
+}
+
+/* HORÁRIO */
+function isOpenNow(){
+    const now = new Date();
+    const day = now.getDay();
+    const time = now.getHours() + now.getMinutes() / 60;
+    if(day === 1) return false;
+    if(time < 18.5 || time > 22.5) return false;
+    return true;
 }
 
 /* UI */
@@ -311,6 +315,12 @@ function toggleBox(id){
 /* CARRINHO */
 function addToCart(name,price){
     playSound();
+
+    if(!isOpenNow()){
+        alert("⏰ Estamos fechados no momento.\nAtendemos de terça a domingo das 18:30 às 22:30.");
+        return;
+    }
+
     cart.push({name,price});
     updateCart();
 }
